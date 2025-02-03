@@ -1,5 +1,7 @@
 using namespace std;
-
+#include <algorithm> 
+#include<iostream>
+#include<string>
 struct Node {
     int cargo;
     Node* next;
@@ -8,4 +10,6 @@ struct Node {
     Node();
     Node(int);
     Node(int, Node*);
+
+    string to_string() const;
 };

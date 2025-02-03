@@ -18,3 +18,7 @@ Node::Node(int cargo, Node* next)
     this->cargo = cargo;
     this->next = next;
 }
+
+string Node::to_string() const {
+    return std::to_string(cargo);
+}
