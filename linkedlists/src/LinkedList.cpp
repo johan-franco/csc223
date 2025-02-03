@@ -22,7 +22,7 @@ string Node::to_string() const {
     return std::to_string(cargo);
 }
 
-string Node::render_list(Node* list) {
+string render_list(Node* list) {
     Node* node = list;
     string rl = "";
     while (node != nullptr) {
@@ -33,3 +33,4 @@ string Node::render_list(Node* list) {
     }
     return rl;
 }
+

@@ -12,5 +12,7 @@ struct Node {
     Node(int, Node*);
 
     string to_string() const;
-    string render_list(Node* list);
+
 };
+
+    string render_list(Node* list);
