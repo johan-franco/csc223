@@ -34,7 +34,7 @@ TEST_CASE("Test can display linked nodes") {
     Node* node3 = new Node(3, node2);
     CHECK(render_list(node3) == "3, 2, 1");
 }
-/*
+
 TEST_CASE("Test can display linked nodes backwards") {
     Node* node1 = new Node(1);
     Node* node2 = new Node(2, node1);
@@ -43,4 +43,3 @@ TEST_CASE("Test can display linked nodes backwards") {
     CHECK(render_list(node4) == "4, 3, 2, 1");
     CHECK(render_list_backward(node4) == "1, 2, 3, 4");
 }
-*/
