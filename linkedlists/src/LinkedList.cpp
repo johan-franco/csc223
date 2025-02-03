@@ -1,5 +1,4 @@
 #include "LinkedList.h"
-using namespace std;
 
 Node::Node()
 {
@@ -21,4 +20,16 @@ Node::Node(int cargo, Node* next)
 
 string Node::to_string() const {
     return std::to_string(cargo);
+}
+
+string Node::render_list(Node* list) {
+    Node* node = list;
+    string rl = "";
+    while (node != nullptr) {
+        rl += node->to_string();
+        node = node->next;
+        if (node != nullptr)
+           rl += ", ";
+    }
+    return rl;
 }
