@@ -6,15 +6,15 @@ build/%.o: src/%.cpp
 	@$(CC) -MM -MT $@ $< > build/$*.d
 	$(CC) -c -o $@ $< -std=$(STD)
 
-build/test_lists: build/LinkedList.o build/test_lists.o
+build/testlists: build/LinkedList.o build/testlists.o
 	$(CC) -o $@ $^ -std=$(STD)
 
 -include build/*.d
 
 .PHONY: test clean
 
-test: build/test_lists
-	./build/test_lists
+test: build/testlists
+	./build/testlists
 
 clean:
 	rm -rf build
