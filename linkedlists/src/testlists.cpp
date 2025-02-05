@@ -43,3 +43,12 @@ TEST_CASE("Test can display linked nodes backwards") {
     CHECK(render_list(node4) == "4, 3, 2, 1");
     CHECK(render_list_backward(node4) == "1, 2, 3, 4");
 }
+
+TEST_CASE("Test can display linked nodes with parenthesis") {
+    Node* node1 = new Node(1);
+    Node* node2 = new Node(2, node1);
+    Node* node3 = new Node(3, node2);
+    Node* node4 = new Node(4, node3);
+    CHECK(render_pretty(node4, &render_list) == "(4, 3, 2, 1)");
+    CHECK(render_pretty(node4, &render_list_backward) == "(1, 2, 3, 4)");
+}

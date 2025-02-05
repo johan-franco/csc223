@@ -34,7 +34,7 @@ string render_list(Node* list) {
     return rl;
 }
 
-string render_list_backward(Node* list, string br) {
+string render_backward_worker(Node* list, string br) {
     if (list == nullptr) return ""; //base case (theoretically all should return to this eventually)
     Node* head = list;
     Node* tail = list->next; 
@@ -42,11 +42,18 @@ string render_list_backward(Node* list, string br) {
     /*If the linked lists are 3 nodes with val 1,2,3 then the first time time it is ran node one is head and
     node 2 is tail. Then node 2 will turn into head and then finally node 3 will be head. At that turn the tail
     will be nullptr causing for render_list_backward to return "" + "" */
-    br = render_list_backward(tail, br) + br;
+    br = render_backward_worker(tail, br) + br;
     if (head->next != nullptr) //When node 3 is head this will not run, which is what we want as br is "" at that point
         br += ", ";
     br += head->to_string(); //THis will add node 3 as the first in the string
 
     return br;
 }
+string render_list_backward(Node* list)
+{
+    return render_backward_worker(list, ""); //This is so render_pretty can properly run backward worker (needs "" as parameter)
+}
 
+string render_pretty(Node* list, string (*list_renderer)(Node*)) {
+    return "(" + list_renderer(list) + ")"; //renders linked nodes and adds ();
+}
