@@ -19,3 +19,4 @@ struct Node {
     string render_backward_worker(Node* list, string= "");
     string render_list_backward(Node* list);
     string render_pretty(Node* list, string (*list_renderer)(Node*));
+    Node* remove_second(Node* list);

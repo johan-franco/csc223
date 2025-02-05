@@ -57,3 +57,15 @@ string render_list_backward(Node* list)
 string render_pretty(Node* list, string (*list_renderer)(Node*)) {
     return "(" + list_renderer(list) + ")"; //renders linked nodes and adds ();
 }
+
+Node* remove_second(Node* list) {
+    Node* first = list;
+    Node* second = list->next;
+
+    // make the first node point to the third
+    first->next = second->next;
+
+    // remove the second node from the list and return a pointer to it
+    second->next = nullptr;
+    return second;
+}
