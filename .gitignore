@@ -1,3 +1,5 @@
 doctest.h
 .DS_Store
 build
+./vscode
+.vscode/settings.json
