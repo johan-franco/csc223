@@ -15,6 +15,16 @@ struct Node {
 
 };
 
+class LinkedList
+{
+    int num_nodes;
+    Node* head;
+
+public:
+    LinkedList();
+    void insert_at_front(int cargo);
+};
+
     string render_list(Node* list);
     string render_backward_worker(Node* list, string= "");
     string render_list_backward(Node* list);

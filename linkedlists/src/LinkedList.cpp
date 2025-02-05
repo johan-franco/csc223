@@ -22,6 +22,17 @@ string Node::to_string() const {
     return std::to_string(cargo);
 }
 
+LinkedList::LinkedList() {
+        num_nodes = 0;
+        head = nullptr;
+}
+
+void LinkedList::insert_at_front(int cargo) {
+    Node* front = new Node(cargo, head);
+    head = front;
+    num_nodes++;
+}
+
 string render_list(Node* list) {
     Node* node = list; 
     string rl = "";
