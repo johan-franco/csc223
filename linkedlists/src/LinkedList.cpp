@@ -33,6 +33,11 @@ void LinkedList::insert_in_front(int cargo) {
     num_nodes++;
 }
 
+void LinkedList::remove_from_front() {
+    Node*newfront = head->next;
+    head = newfront;
+    num_nodes--;
+}
 string LinkedList::to_string() const{
     Node* printer = head;
     string ll = "";

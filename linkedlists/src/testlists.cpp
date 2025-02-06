@@ -62,7 +62,7 @@ TEST_CASE("Test can remove second node") {
     CHECK(render_list(node4) == "4, 2, 1");
 }
 
-TEST_CASE("Test can create empty linked list") {
+TEST_CASE("Test can insert nodes in front") {
     LinkedList list;
     CHECK(list.to_string() == "Empty list");
     list.insert_in_front(5);
@@ -71,4 +71,19 @@ TEST_CASE("Test can create empty linked list") {
     CHECK(list.to_string() == "42 -> 5");
     list.insert_in_front(9);
     CHECK(list.to_string() == "9 -> 42 -> 5");
+}
+
+TEST_CASE("Test can remove nodes in front") {
+    LinkedList list;
+    list.insert_in_front(5);
+    list.insert_in_front(42);
+    list.insert_in_front(9);
+    CHECK(list.to_string() == "9 -> 42 -> 5");
+    list.remove_from_front();
+    CHECK(list.to_string() == "42 -> 5");
+    list.remove_from_front();
+    CHECK(list.to_string() == "5");
+    list.remove_from_front();
+    CHECK(list.to_string() == "Empty list");
+
 }

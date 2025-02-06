@@ -23,6 +23,8 @@ class LinkedList
 public:
     LinkedList();
     void insert_in_front(int cargo);
+    void remove_from_front();
+
     string to_string() const;
 };
 
