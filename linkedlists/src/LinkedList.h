@@ -22,7 +22,8 @@ class LinkedList
 
 public:
     LinkedList();
-    void insert_at_front(int cargo);
+    void insert_in_front(int cargo);
+    string to_string() const;
 };
 
     string render_list(Node* list);

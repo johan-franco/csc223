@@ -61,6 +61,7 @@ TEST_CASE("Test can remove second node") {
     CHECK(remove_second(node4)->to_string() == "3");
     CHECK(render_list(node4) == "4, 2, 1");
 }
+
 TEST_CASE("Test can create empty linked list") {
     LinkedList list;
     CHECK(list.to_string() == "Empty list");

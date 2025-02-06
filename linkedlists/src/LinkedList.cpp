@@ -27,10 +27,24 @@ LinkedList::LinkedList() {
         head = nullptr;
 }
 
-void LinkedList::insert_at_front(int cargo) {
+void LinkedList::insert_in_front(int cargo) {
     Node* front = new Node(cargo, head);
     head = front;
     num_nodes++;
+}
+
+string LinkedList::to_string() const{
+    Node* printer = head;
+    string ll = "";
+    if(head == nullptr) return "Empty list";
+    while (printer != nullptr) { // Stop at end of list
+
+        ll += printer->to_string();
+        printer = printer->next; // Go to next part of list
+        if (printer != nullptr) //Add comma if more are linked
+           ll += " -> ";
+    }
+    return ll;
 }
 
 string render_list(Node* list) {
