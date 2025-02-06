@@ -22,6 +22,7 @@ class LinkedList
 
 public:
     LinkedList();
+    LinkedList(Node* start, int num);
     void insert_in_front(int cargo);
     void remove_from_front();
 

@@ -27,6 +27,11 @@ LinkedList::LinkedList() {
         head = nullptr;
 }
 
+LinkedList::LinkedList(Node* start, int num) {
+        head = start;
+        num_nodes = num;
+}
+
 void LinkedList::insert_in_front(int cargo) {
     Node* front = new Node(cargo, head);
     head = front;
