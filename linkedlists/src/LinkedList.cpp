@@ -37,11 +37,11 @@ string LinkedList::to_string() const{
     Node* printer = head;
     string ll = "";
     if(head == nullptr) return "Empty list";
-    while (printer != nullptr) { // Stop at end of list
+    while (printer != nullptr) { 
 
         ll += printer->to_string();
-        printer = printer->next; // Go to next part of list
-        if (printer != nullptr) //Add comma if more are linked
+        printer = printer->next; 
+        if (printer != nullptr) 
            ll += " -> ";
     }
     return ll;
