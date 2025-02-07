@@ -35,7 +35,7 @@ public:
         num_nodes = 0;
         head = nullptr;
     }
-    LinkedList(Node* start, int num);
+    //LinkedList(Node* start, int num);
 
     void insert_in_front(T cargo){
         Node<T>* front = new Node<T>(cargo, head);
