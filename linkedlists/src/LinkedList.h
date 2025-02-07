@@ -65,6 +65,15 @@ public:
         }
         return s;
     }
+
+    T get_item(int pos) {
+        if(pos > num_nodes) {pos -= num_nodes;}
+        Node<T>* traveler = this->head;
+        for(int i = 1; i < pos; i++) {
+            traveler = traveler->next;
+        }
+        return traveler->cargo;
+    }
 };
 /*
     string render_list(Node* list);

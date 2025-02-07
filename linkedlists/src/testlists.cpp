@@ -17,3 +17,13 @@ TEST_CASE("Test basic list of strings operations") {
     CHECK(toppings.remove_from_front() == "onions");
     CHECK(toppings.to_string() == "anchovies, cheese");
 }
+
+TEST_CASE("Test can get cargo from certain places") {
+    LinkedList<string> toppings;
+    toppings.insert_in_front("cheese");
+    toppings.insert_in_front("anchovies");
+    toppings.insert_in_front("onions");
+    CHECK(toppings.to_string() == "onions, anchovies, cheese");
+    CHECK(toppings.get_item(2) == "anchovies");
+    CHECK(toppings.get_item(1) == "onions");
+}
