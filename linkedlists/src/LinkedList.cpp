@@ -1,3 +1,4 @@
+//File no longer relevant but I'm keeping it for now
 #include "LinkedList.h"
 
 Node::Node()
@@ -84,6 +85,7 @@ string render_backward_worker(Node* list, string br) {
 
     return br;
 }
+
 string render_list_backward(Node* list)
 {
     return render_backward_worker(list, ""); //This is so render_pretty can properly run backward worker (needs "" as parameter)

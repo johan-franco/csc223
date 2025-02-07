@@ -2,35 +2,74 @@ using namespace std;
 #include <algorithm> 
 #include<iostream>
 #include<string>
+
+template <class T>
 struct Node {
-    int cargo;
-    Node* next;
+    T cargo;
+    Node<T>* next;
 
     // constructors
-    Node();
-    Node(int);
-    Node(int, Node*);
+    Node(){
+        this->cargo = 0;
+        this->next = nullptr;
+    }
+    Node(T cargo, Node<T>* next){
+        this->cargo = cargo;
+        this->next = next;
+    }
 
-    string to_string() const;
+    string to_string() const    {
+        return string(cargo);
+    }
 
 };
 
+template <class T>
 class LinkedList
 {
     int num_nodes;
-    Node* head;
+    Node<T>* head;
 
 public:
-    LinkedList();
+    LinkedList(){
+        num_nodes = 0;
+        head = nullptr;
+    }
     LinkedList(Node* start, int num);
-    void insert_in_front(int cargo);
-    void remove_from_front();
 
-    string to_string() const;
+    void insert_in_front(T cargo){
+        Node<T>* front = new Node<T>(cargo, head);
+        head = front;
+        num_nodes++;
+    };
+
+    T remove_from_front() {
+        if (head == nullptr)
+            throw runtime_error("Can't remove from and empty list!");
+        T cargo = head->cargo;
+        Node<T>* front = head;
+        head = head->next;
+        delete front;
+        num_nodes--;
+        return cargo;
+    }
+
+    string to_string() const{
+        Node<T>* node = head;
+        string s = "";
+        while (node != nullptr) {
+            s += node->to_string();
+            node = node->next;
+            if (node != nullptr)
+                s += ", ";
+        }
+        return s;
+    }
 };
-
+/*
     string render_list(Node* list);
     string render_backward_worker(Node* list, string= "");
     string render_list_backward(Node* list);
     string render_pretty(Node* list, string (*list_renderer)(Node*));
     Node* remove_second(Node* list);
+*/
