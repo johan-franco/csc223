@@ -29,3 +29,13 @@ TEST_CASE("Test can get cargo from certain places") {
     CHECK(toppings.get_item(1) == "onions");
     CHECK(toppings.get_item(5) == "anchovies");
 }
+
+TEST_CASE("Test can insert nodes") {
+    LinkedList<string> toppings;
+    toppings.insert_in_front("cheese");
+    toppings.insert_in_front("anchovies");
+    toppings.insert_in_front("onions");
+    toppings.insert_item("pineapple", 2);
+    CHECK(toppings.to_string() == "onions, anchovies, pineapple, cheese");
+
+}

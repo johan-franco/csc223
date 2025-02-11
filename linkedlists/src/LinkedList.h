@@ -78,10 +78,10 @@ public:
     void insert_item(T cargo, int pos) {        
         Node<T>* traveler = this->head;
         for(int i = 1; i < pos; i++) {
-            head->next;
+            traveler=traveler->next;
         }
-        Node<T>* newnode(cargo, head->next);
-        head->next = newnode;
+        Node<T>* newnode(cargo, traveler->next);
+        traveler->next = newnode;
 
 
     }
