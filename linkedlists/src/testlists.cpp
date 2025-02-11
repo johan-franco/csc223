@@ -24,6 +24,8 @@ TEST_CASE("Test can get cargo from certain places") {
     toppings.insert_in_front("anchovies");
     toppings.insert_in_front("onions");
     CHECK(toppings.to_string() == "onions, anchovies, cheese");
+    CHECK(toppings.get_item(3) == "cheese");
     CHECK(toppings.get_item(2) == "anchovies");
     CHECK(toppings.get_item(1) == "onions");
+    CHECK(toppings.get_item(5) == "anchovies");
 }

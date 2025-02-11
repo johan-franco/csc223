@@ -74,6 +74,17 @@ public:
         }
         return traveler->cargo;
     }
+
+    void insert_item(T cargo, int pos) {        
+        Node<T>* traveler = this->head;
+        for(int i = 1; i < pos; i++) {
+            head->next;
+        }
+        Node<T>* newnode(cargo, head->next);
+        head->next = newnode;
+
+
+    }
 };
 /*
     string render_list(Node* list);
