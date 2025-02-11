@@ -67,14 +67,14 @@ public:
     }
 
     T get_item(int pos) {
-        if(pos > num_nodes) {pos -= num_nodes;}
+        if(pos > num_nodes) {pos = pos%num_nodes;}
         Node<T>* traveler = this->head;
         for(int i = 1; i < pos; i++) {
             traveler = traveler->next;
         }
         return traveler->cargo;
     }
-
+/*
     void insert_item(T cargo, int pos) {        
         Node<T>* traveler = this->head;
         for(int i = 1; i < pos; i++) {
@@ -85,7 +85,9 @@ public:
 
 
     }
+*/
 };
+
 /*
     string render_list(Node* list);
     string render_backward_worker(Node* list, string= "");

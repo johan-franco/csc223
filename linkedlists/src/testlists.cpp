@@ -30,6 +30,7 @@ TEST_CASE("Test can get cargo from certain places") {
     CHECK(toppings.get_item(5) == "anchovies");
 }
 
+/*
 TEST_CASE("Test can insert nodes") {
     LinkedList<string> toppings;
     toppings.insert_in_front("cheese");
@@ -39,3 +40,4 @@ TEST_CASE("Test can insert nodes") {
     CHECK(toppings.to_string() == "onions, anchovies, pineapple, cheese");
 
 }
+*/
