@@ -23,11 +23,13 @@ TEST_CASE("Test can get cargo from certain places") {
     toppings.insert_in_front("cheese");
     toppings.insert_in_front("anchovies");
     toppings.insert_in_front("onions");
+    Node<int>* Pineapple;
+    toppings.insert_in_front(Pineapple);
     CHECK(toppings.to_string() == "onions, anchovies, cheese");
     CHECK(toppings.get_item(3) == "cheese");
     CHECK(toppings.get_item(2) == "anchovies");
     CHECK(toppings.get_item(1) == "onions");
-    CHECK(toppings.get_item(5) == "anchovies");
+    CHECK(toppings.get_item(5) == "Position is higher than number of nodes");
 }
 
 /*

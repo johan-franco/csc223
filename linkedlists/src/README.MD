@@ -4,7 +4,7 @@
     ```c++:
     T get_item(int pos) {
         // If the position exceeds the number of nodes, reduce it to a valid position using modulo
-        if(pos > num_nodes) {pos = pos%num_nodes;}
+        if(pos > num_nodes) {return "Position is higher than number of nodes";}
 
         // Initialize a pointer to traverse the linked list, starting from the head node
         Node<T>* traveler = this->head;
