@@ -72,7 +72,9 @@ public:
         for(int i = 1; i < pos; i++) {
             traveler = traveler->next;
         }
-        return traveler->cargo;
+        T delivery = travevler->cargo;
+
+        return delivery;
     }
 /*
     void insert_item(T cargo, int pos) {        

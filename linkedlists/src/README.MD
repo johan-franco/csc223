@@ -13,8 +13,11 @@
         for(int i = 1; i < pos; i++) {
             traveler = traveler->next;
         }
+        T delivery = traveler->cargo;
 
+        //ensure that no memory is leaked
+        delete traveler;
         // Return the cargo (data) stored at the node at the specified position
-        return traveler->cargo;
+        return delivery;
     }
     ```
