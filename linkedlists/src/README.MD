@@ -47,7 +47,7 @@ TEST_CASE("Test Size Grabber after a removal") {
 }
 ```
 # Get_Item
-    Program needs to return cargo at the place specified.
+Program needs to return cargo at the place specified.
 
 ```c++:
 T get_item(int pos) {
@@ -83,13 +83,13 @@ Inserting a node into a linked list involves these key steps:
 
 In the `LinkedList` template:
 
-        ```c++:
+```c++:
     void insert_item(Node<T>* before, T cargo);
-    ```
+```
 
 In the rest of the header file:
 
-    ```c++:
+```c++:
 template <typename T>
 void LinkedList<T>::insert_item(Node<T>* before, T cargo) {
     if (before == nullptr) {
