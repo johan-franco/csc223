@@ -1,24 +1,3 @@
-# Get_Item
-    Program needs to return cargo at the place specified.
-
-    ```c++:
-    T get_item(int pos) {
-        // If the position exceeds the number of nodes, reduce it to a valid position using modulo
-        if(pos > num_nodes) {return "Position is higher than number of nodes";}
-
-        // Initialize a pointer to traverse the linked list, starting from the head node
-        Node<T>* traveler = this->head;
-
-        // Traverse the linked list until reaching the desired position (pos)
-        for(int i = 1; i < pos; i++) {
-            traveler = traveler->next;
-        }
-
-        // Return the cargo (data) stored at the node at the specified position
-        return traveler->cargo;
-    }
-```
-
 # int size()
 
     This program wants to return the number of items in the list. We can do this through either simply returning the num_nodes variable or through cycling through the entire list until we reach a nullptr. Note that this traversel wouldn't work for other types of linked lists like [circular linked list](https://www.geeksforgeeks.org/circular-linked-list/) as there will never be a nullptr.
@@ -67,33 +46,29 @@ TEST_CASE("Test Size Grabber after a removal") {
     CHECK(list.IntSize() == "(2)");
 }
 ```
+# Get_Item
+    Program needs to return cargo at the place specified.
 
-# The Logic Behind Removing a Node in a LinkedList (Anfal)
+    ```c++:
+    T get_item(int pos) {
+        // If the position exceeds the number of nodes, reduce it to a valid position using modulo
+        if(pos > num_nodes) {return "Position is higher than number of nodes";}
 
-1. Checking if the List in Empty --> Throw an Error!
+        // Initialize a pointer to traverse the linked list, starting from the head node
+        Node<T>* traveler = this->head;
 
-2. If the position given in the remove_item function is 1, we already have a function called "remove_from_front" so use that
+        // Traverse the linked list until reaching the desired position (pos)
+        for(int i = 1; i < pos; i++) {
+            traveler = traveler->next;
+        }
 
-3. If the position is greater than 1, then we traverse until you're at the Node before you wanna remove.
-
-4. Set the pointer of the Node before the target Node to the Node after the target Node.
-
-5. Delete the Node you want to remove and reduce the num_node count. 
-
-
-## Code
-![Alt text](image-1.png)
-
-
-## Diagram
-
-![Alt text](image.png)
-
-### Source for Diagram and Logic for LinkedList Deletion:
-https://afteracademy.com/blog/types-of-linked-list-and-operation-on-linked-list
+        // Return the cargo (data) stored at the node at the specified position
+        return traveler->cargo;
+    }
+```
 
 
-# Insert item function
+# Insert item function (cody)
 
 ## General concept:
 
@@ -105,7 +80,7 @@ Inserting a node into a linked list involves these key steps:
 
 ![diagram](Linkedlist_insert_middle.png)
 
-## Cody's Code:
+## My Code:
 
 In the `LinkedList` template:
 
@@ -147,3 +122,28 @@ void LinkedList<T>::insert_item(Node<T>* before, T cargo) {
     - `before->next = newNode;` makes the `before` node's `next` pointer point to the newly created node.
     - `newNode->next = after;` makes the new node's `next` pointer point to the `after` node. This re-establishes the connection that was previously between `before` and `after`.
 7. **Increments Node Count**: The `num_nodes` counter is incremented to keep track of the list's size.
+
+# The Logic Behind Removing a Node in a LinkedList (Anfal)
+
+1. Checking if the List in Empty --> Throw an Error!
+
+2. If the position given in the remove_item function is 1, we already have a function called "remove_from_front" so use that
+
+3. If the position is greater than 1, then we traverse until you're at the Node before you wanna remove.
+
+4. Set the pointer of the Node before the target Node to the Node after the target Node.
+
+5. Delete the Node you want to remove and reduce the num_node count. 
+
+
+## Code
+![Alt text](image-1.png)
+
+
+## Diagram
+
+![Alt text](image.png)
+
+### Source for Diagram and Logic for LinkedList Deletion:
+https://afteracademy.com/blog/types-of-linked-list-and-operation-on-linked-list
+
