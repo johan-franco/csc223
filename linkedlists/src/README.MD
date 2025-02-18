@@ -22,6 +22,8 @@
 # int size()
 
     This program wants to return the number of items in the list. We can do this through either simply returning the num_nodes variable or through cycling through the entire list until we reach a nullptr. Note that this traversel wouldn't work for other types of linked lists like [circular linked list](https://www.geeksforgeeks.org/circular-linked-list/).
+
+    The easiest way to return the correct number of items is through the num_nodes variable and it should always be accurate as long as functions that modify the number of nodes properly adjust num_nodes.
    ```c++:
     int size() {
         return this->num_nodes
