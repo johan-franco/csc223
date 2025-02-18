@@ -26,7 +26,7 @@
 
 Example Test Cases:
 
-   ```cpp
+   ```c++:
 TEST_CASE("Test Size Grabber") {
     LinkedList<int> list;
     list.insert_at_front(1);
@@ -49,7 +49,7 @@ TEST_CASE("Test Size Grabber after a removal") {
 # Get_Item
     Program needs to return cargo at the place specified.
 
-    ```cpp
+    ```c++:
 T get_item(int pos) {
      // If the position exceeds the number of nodes, return an error
     if(pos > num_nodes) {return "Position is higher than number of nodes";}
@@ -83,13 +83,13 @@ Inserting a node into a linked list involves these key steps:
 
 In the `LinkedList` template:
 
-        ```cpp
+        ```c++:
     void insert_item(Node<T>* before, T cargo);
     ```
 
 In the rest of the header file:
 
-    ```cpp
+    ```c++:
 template <typename T>
 void LinkedList<T>::insert_item(Node<T>* before, T cargo) {
     if (before == nullptr) {
