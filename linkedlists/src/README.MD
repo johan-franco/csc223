@@ -13,11 +13,30 @@
         for(int i = 1; i < pos; i++) {
             traveler = traveler->next;
         }
-        T delivery = traveler->cargo;
 
-        //ensure that no memory is leaked
-        delete traveler;
         // Return the cargo (data) stored at the node at the specified position
-        return delivery;
+        return traveler->cargo;
     }
+    ```
+
+# int size()
+
+    This program wants to return the number of items in the list. We can do this through either simply returning the num_nodes variable or through cycling through the entire list until we reach a nullptr. Note that this traversel wouldn't work for other types of linked lists like [circular linked list](https://www.geeksforgeeks.org/circular-linked-list/).
+   ```c++:
+    int size() {
+        return this->num_nodes
+    }
+
+//Or we could traverse the entire list until we encounter a nullptr
+//This would only works if the linked list is linear
+
+    int size() {
+        int count = 0;
+        Node<T>* traveler = head;
+        while (traveler != nullptr) {
+            count++;
+            traveler = traveler->next;
+        }
+        return count;
+   }
     ```

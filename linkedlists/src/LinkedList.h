@@ -67,16 +67,19 @@ public:
     }
 
     T get_item(int pos) {
+        // If the position exceeds the number of nodes, reduce it to a valid position using modulo
         if(pos > num_nodes) {return "Position is higher than number of nodes";}
+
+        // Initialize a pointer to traverse the linked list, starting from the head node
         Node<T>* traveler = this->head;
+
+        // Traverse the linked list until reaching the desired position (pos)
         for(int i = 1; i < pos; i++) {
             traveler = traveler->next;
         }
-        T delivery = traveler->cargo;
 
-        delete traveler;
-
-        return delivery;
+        // Return the cargo (data) stored at the node at the specified position
+        return traveler->cargo;
     }
 /*
     void insert_item(T cargo, int pos) {        
