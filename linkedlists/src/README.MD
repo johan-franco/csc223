@@ -5,7 +5,7 @@
 ![circle](circle.webp)
 
     The easiest way to return the correct number of items is through the num_nodes variable and it should always be accurate as long as functions that modify the number of nodes properly adjust num_nodes.
-   ```cpp:
+   ```cpp
     int size() {
         return this->num_nodes
     }
@@ -26,7 +26,7 @@
 
 Example Test Cases:
 
-   ```cpp:
+   ```cpp
 TEST_CASE("Test Size Grabber") {
     LinkedList<int> list;
     list.insert_at_front(1);
@@ -49,7 +49,7 @@ TEST_CASE("Test Size Grabber after a removal") {
 # Get_Item
     Program needs to return cargo at the place specified.
 
-    ```cpp:
+    ```cpp
     T get_item(int pos) {
         // If the position exceeds the number of nodes, reduce it to a valid position using modulo
         if(pos > num_nodes) {return "Position is higher than number of nodes";}
