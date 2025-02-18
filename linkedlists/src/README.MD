@@ -49,23 +49,22 @@ TEST_CASE("Test Size Grabber after a removal") {
 # Get_Item
     Program needs to return cargo at the place specified.
 
-        ```cpp
-    T get_item(int pos) {
-        // If the position exceeds the number of nodes, return an error
-        if(pos > num_nodes) {return "Position is higher than number of nodes";}
-
+    ```cpp
+T get_item(int pos) {
+     // If the position exceeds the number of nodes, return an error
+    if(pos > num_nodes) {return "Position is higher than number of nodes";}
         // Initialize a pointer to traverse the linked list, starting from the head node
-        Node<T>* traveler = this->head;
+    Node<T>* traveler = this->head;
 
-        // Traverse the linked list until reaching the desired position (pos)
-        for(int i = 1; i < pos; i++) {
-            traveler = traveler->next;
-        }
+    // Traverse the linked list until reaching the desired position (pos)
+    for(int i = 1; i < pos; i++) {
+        traveler = traveler->next;
+    }
 
         // Return the cargo (data) stored at the node at the specified position
-        return traveler->cargo;
-    }
-    ```
+    return traveler->cargo;
+}
+```
 
 
 # Insert item function (cody)
@@ -84,9 +83,9 @@ Inserting a node into a linked list involves these key steps:
 
 In the `LinkedList` template:
 
-    ```cpp
+        ```cpp
     void insert_item(Node<T>* before, T cargo);
-```
+    ```
 
 In the rest of the header file:
 
