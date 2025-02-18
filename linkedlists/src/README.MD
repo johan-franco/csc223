@@ -84,7 +84,7 @@ Inserting a node into a linked list involves these key steps:
 
 In the `LinkedList` template:
 
-```cpp
+    ```cpp
 void insert_item(Node<T>* before, T cargo);
 ```
 
