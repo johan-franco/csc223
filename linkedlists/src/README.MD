@@ -17,7 +17,7 @@
         // Return the cargo (data) stored at the node at the specified position
         return traveler->cargo;
     }
-    ```
+```
 
 # int size()
 
@@ -41,4 +41,27 @@
         }
         return count;
    }
-    ```
+```
+
+Example Test Cases:
+
+   ```c++:
+TEST_CASE("Test Size Grabber") {
+    LinkedList<int> list;
+    list.insert_at_front(1);
+    list.insert_at_front(2);
+    list.insert_at_front(3);
+    CHECK(list.to_string() == "(3, 2, 1)");
+    CHECK(list.IntSize() == "(3)");
+}
+
+TEST_CASE("Test Size Grabber after a removal") {
+    LinkedList<int> list;
+    list.insert_at_front(1);
+    list.insert_at_front(2);
+    list.insert_at_front(3);
+    list.remove_from_front();
+    CHECK(list.to_string() == "(2, 1)");
+    CHECK(list.IntSize() == "(2)");
+}
+```
