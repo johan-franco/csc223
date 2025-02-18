@@ -26,7 +26,7 @@
 
 Example Test Cases:
 
-   ```c++:
+```c++:
 TEST_CASE("Test Size Grabber") {
     LinkedList<int> list;
     list.insert_at_front(1);
@@ -49,7 +49,7 @@ TEST_CASE("Test Size Grabber after a removal") {
 # Get_Item
     Program needs to return cargo at the place specified.
 
-    ```c++:
+```c++:
 T get_item(int pos) {
      // If the position exceeds the number of nodes, return an error
     if(pos > num_nodes) {return "Position is higher than number of nodes";}
