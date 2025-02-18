@@ -65,7 +65,7 @@ TEST_CASE("Test Size Grabber after a removal") {
         // Return the cargo (data) stored at the node at the specified position
         return traveler->cargo;
     }
-```
+    ```
 
 
 # Insert item function (cody)
@@ -85,7 +85,7 @@ Inserting a node into a linked list involves these key steps:
 In the `LinkedList` template:
 
     ```cpp
-void insert_item(Node<T>* before, T cargo);
+    void insert_item(Node<T>* before, T cargo);
 ```
 
 In the rest of the header file:
