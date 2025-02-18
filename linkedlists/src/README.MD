@@ -51,7 +51,7 @@ TEST_CASE("Test Size Grabber after a removal") {
 
     ```cpp
     T get_item(int pos) {
-        // If the position exceeds the number of nodes, reduce it to a valid position using modulo
+        // If the position exceeds the number of nodes, return an error
         if(pos > num_nodes) {return "Position is higher than number of nodes";}
 
         // Initialize a pointer to traverse the linked list, starting from the head node
