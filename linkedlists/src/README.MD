@@ -146,3 +146,7 @@ void LinkedList<T>::insert_item(Node<T>* before, T cargo) {
 ### Source for Diagram and Logic for LinkedList Deletion:
 https://afteracademy.com/blog/types-of-linked-list-and-operation-on-linked-list
 
+## Everyone's Repo:
+1. [Cody's Repo](https://codeberg.org/Cody/csc223/src/branch/main/LinkedLists)
+2. [Anfal's Repo](https://github.com/Egamer512/csc223/tree/main/LinkedList)
+3. [Anar's Repo](https://github.com/FunnyManAnar/csc223/tree/main/src)
