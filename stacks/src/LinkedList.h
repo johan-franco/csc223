@@ -25,19 +25,18 @@ struct Node {
 };
 
 template <class T>
-class LinkedList
+struct LinkedList
 {
     int num_nodes;
     Node<T>* head;
 
-public:
     LinkedList(){
         num_nodes = 0;
         head = nullptr;
     }
     //LinkedList(Node* start, int num);
 
-    void insert_in_front(T cargo){
+    void insert_at_front(T cargo){
         Node<T>* front = new Node<T>(cargo, head);
         head = front;
         num_nodes++;
