@@ -80,6 +80,9 @@ struct LinkedList
         // Return the cargo (data) stored at the node at the specified position
         return traveler->cargo;
     }
+    int length() const {
+        return this->num_nodes;
+    }
 /*
     void insert_item(T cargo, int pos) {        
         Node<T>* traveler = this->head;
