@@ -37,3 +37,17 @@ TEST_CASE("Test basic stack operations on stack of strings") {
     CHECK(stack.empty() == true);
 }
 
+TEST_CASE("Test stack of user defined class") {
+    Stack<Node<int>*> NumAnimals;
+    Node<int>* cats = new Node(7);
+    NumAnimals.push(cats);
+    CHECK(NumAnimals.top()->to_string() == "7");
+    Node<int>* dogs = new Node(3, cats);
+    NumAnimals.push(dogs);
+    CHECK(NumAnimals.top()->to_string() == "3");
+    CHECK(NumAnimals.empty() == false);
+    CHECK(NumAnimals.pop()->cargo == 3);
+    CHECK(NumAnimals.pop()->cargo == 7);
+
+
+}

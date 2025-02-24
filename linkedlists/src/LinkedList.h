@@ -17,10 +17,6 @@ struct Node {
         this->cargo = cargo;
         this->next = next;
     }
-    Node(T cargo){
-        this->cargo = cargo;
-        this->next = nullptr;
-    }
 
     string to_string() const    {
         return string(cargo);
