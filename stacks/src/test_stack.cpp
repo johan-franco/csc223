@@ -20,3 +20,20 @@ TEST_CASE("Test basic stack operations on stack of ints") {
     CHECK(stack.pop() == 9);
     CHECK(stack.empty() == true);
 }
+
+TEST_CASE("Test basic stack operations on stack of strings") {
+    Stack<string> stack;
+    stack.push("cheese");
+    CHECK(stack.top() == "cheese");
+    stack.push("anchovies");
+    CHECK(stack.top() == "anchovies");
+    stack.push("onions");
+    CHECK(stack.top() == "onions");
+    CHECK(stack.pop() == "onions");
+    CHECK(stack.top() == "anchovies");
+    CHECK(stack.empty() == false);
+    stack.pop();
+    CHECK(stack.pop() == "cheese");
+    CHECK(stack.empty() == true);
+}
+
