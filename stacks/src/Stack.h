@@ -24,7 +24,10 @@ struct Stack : public LinkedList<T>
 };
 
 string remspaces(string input) {
-    
+    std::string::iterator end_pos = std::remove(input.begin(), input.end(), ' ');
+    input.erase(end_pos, input.end());
+    string output = input;
+    return output;
 }
 
 int eval_postfix_expr(string s) {

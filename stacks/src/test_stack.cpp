@@ -37,6 +37,11 @@ TEST_CASE("Test basic stack operations on stack of strings") {
     CHECK(stack.empty() == true);
 }
 
+TEST_CASE("Testing ability to remove spaces") {
+    string s = "1 2 3 4 5 6";
+    CHECK(remspaces(s) == "123456");
+
+}
 /* work in progress
 TEST_CASE("Test stack of user defined class") {
     Stack<Node<int>*> NumAnimals;
