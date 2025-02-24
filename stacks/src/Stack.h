@@ -22,3 +22,12 @@ struct Stack : public LinkedList<T>
        return LinkedList<T>::head->cargo;
     }
 };
+
+string remspaces(string input) {
+    
+}
+
+int eval_postfix_expr(string s) {
+    Stack<int> Operands;
+
+}

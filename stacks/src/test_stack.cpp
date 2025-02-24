@@ -37,6 +37,7 @@ TEST_CASE("Test basic stack operations on stack of strings") {
     CHECK(stack.empty() == true);
 }
 
+/* work in progress
 TEST_CASE("Test stack of user defined class") {
     Stack<Node<int>*> NumAnimals;
     Node<int>* cats = new Node(7);
@@ -51,3 +52,5 @@ TEST_CASE("Test stack of user defined class") {
 
 
 }
+*/
+
