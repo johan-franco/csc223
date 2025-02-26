@@ -28,13 +28,11 @@ struct Stack : public LinkedList<T>
 };
 
 vector<string> splitspaces(string input) {
-    int i = 0;
     stringstream ss(input);
     vector<string> output;
     string nums;
     while (ss >> nums) {
         output.push_back(nums);
-        i++;
     }
     return output;
 }
