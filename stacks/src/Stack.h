@@ -37,29 +37,31 @@ vector<string> splitspaces(string input) {
     return output;
 }
 
-/*
+
 int eval_postfix_expr(string s) {
     Stack<int> Operands;
     vector<string> proc = splitspaces(s);
     for(int i = 0; i < size(proc); i++) {
-        if(proc[i]-'0' >= 0) {
-            Operands.push(proc[i]);
+        string vecval = proc[i];
+        int numoroperator = vecval[0] - '0'; 
+        if(numoroperator >= 0) {
+            int operand = stoi(vecval);
+            Operands.push(operand);
         }
         else {
             int num = Operands.pop();
-            if(proc[i]-'0' == ADD) {
+            if(numoroperator == ADD) {
                 Operands.push(num + Operands.pop());
             }
-            if(proc[i]-'0' == SUB) {
+            if(numoroperator == SUB) {
                 Operands.push(num - Operands.pop());
             }
-            if(proc[i]-'0' == MULT) {
+            if(numoroperator == MULT) {
                 Operands.push(num * Operands.pop());
             }
-            if(proc[i]-'0' == DIV) {
+            if(numoroperator == DIV) {
                 Operands.push(num / Operands.pop());
             }
         }
     }
 }
-*/
