@@ -37,14 +37,16 @@ TEST_CASE("Test basic stack operations on stack of strings") {
     CHECK(stack.empty() == true);
 }
 
-TEST_CASE("Testing ability to remove spaces") {
-    string s = "1 2 3 4 5 6";
-    CHECK(remspaces(s) == "123456");
-
-}
 
 TEST_CASE("Test split_on_spaces") {
-    
+    string s = "1 2 3 4 5 6";
+    vector<string> test = splitspaces(s);
+    CHECK(test[0] == "1");
+    CHECK(test[1] == "2");
+    CHECK(test[2] == "3");
+    CHECK(test[3] == "4");
+    CHECK(test[4] == "5");
+    CHECK(test[5] == "6");
 }
 /* work in progress
 TEST_CASE("Test stack of user defined class") {

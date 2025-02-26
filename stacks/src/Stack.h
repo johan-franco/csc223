@@ -33,13 +33,13 @@ vector<string> splitspaces(string input) {
     vector<string> output;
     string nums;
     while (ss >> nums) {
-        output[i] = nums;
+        output.push_back(nums);
         i++;
     }
     return output;
 }
 
-
+/*
 int eval_postfix_expr(string s) {
     Stack<int> Operands;
     vector<string> proc = splitspaces(s);
@@ -64,3 +64,4 @@ int eval_postfix_expr(string s) {
         }
     }
 }
+*/
