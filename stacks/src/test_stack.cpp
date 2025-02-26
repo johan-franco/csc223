@@ -51,6 +51,8 @@ TEST_CASE("Test split_on_spaces") {
 
 TEST_CASE("Testing eval_postfix ") {
     CHECK(eval_postfix_expr("5 4 + 2 *" ) == 18);
+    CHECK(eval_postfix_expr("12 2 * 4 +") == 28);
+    CHECK(eval_postfix_expr("11 6 3 / 4 + -") == 5);
 }
 /* work in progress
 TEST_CASE("Test stack of user defined class") {

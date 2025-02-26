@@ -54,7 +54,7 @@ int eval_postfix_expr(string s) {
                 Operands.push(num + Operands.pop());
             }
             if(numoroperator == SUB) {
-                Operands.push(num - Operands.pop());
+                Operands.push(Operands.pop() - num);
             }
             if(numoroperator == MULT) {
                 Operands.push(num * Operands.pop());
