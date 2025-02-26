@@ -1,4 +1,5 @@
 #include "LinkedList.h"
+#include <vector>
 #define ADD  -5
 #define MULT -6
 #define SUB -3
@@ -26,16 +27,22 @@ struct Stack : public LinkedList<T>
     }
 };
 
-string remspaces(string input) {
-    std::string::iterator end_pos = std::remove(input.begin(), input.end(), ' ');
-    input.erase(end_pos, input.end());
-    string output = input;
+vector<string> splitspaces(string input) {
+    int i = 0;
+    stringstream ss(input);
+    vector<string> output;
+    string nums;
+    while (ss >> nums) {
+        output[i] = nums;
+        i++;
+    }
     return output;
 }
 
+
 int eval_postfix_expr(string s) {
     Stack<int> Operands;
-    string proc = remspaces(s);
+    vector<string> proc = splitspaces(s);
     for(int i = 0; i < size(proc); i++) {
         if(proc[i]-'0' >= 0) {
             Operands.push(proc[i]);

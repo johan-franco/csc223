@@ -42,6 +42,10 @@ TEST_CASE("Testing ability to remove spaces") {
     CHECK(remspaces(s) == "123456");
 
 }
+
+TEST_CASE("Test split_on_spaces") {
+    
+}
 /* work in progress
 TEST_CASE("Test stack of user defined class") {
     Stack<Node<int>*> NumAnimals;
