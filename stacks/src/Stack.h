@@ -1,5 +1,8 @@
 #include "LinkedList.h"
-
+#define ADD  -5
+#define MULT -6
+#define SUB -3
+#define DIV -1
 
 template <class T>
 struct Stack : public LinkedList<T>
@@ -32,5 +35,25 @@ string remspaces(string input) {
 
 int eval_postfix_expr(string s) {
     Stack<int> Operands;
-
+    string proc = remspaces(s);
+    for(int i = 0; i < size(proc); i++) {
+        if(proc[i]-'0' >= 0) {
+            Operands.push(proc[i]);
+        }
+        else {
+            int num = Operands.pop();
+            if(proc[i]-'0' == ADD) {
+                Operands.push(num + Operands.pop());
+            }
+            if(proc[i]-'0' == SUB) {
+                Operands.push(num - Operands.pop());
+            }
+            if(proc[i]-'0' == MULT) {
+                Operands.push(num * Operands.pop());
+            }
+            if(proc[i]-'0' == DIV) {
+                Operands.push(num / Operands.pop());
+            }
+        }
+    }
 }
