@@ -60,7 +60,7 @@ int eval_postfix_expr(string s) {
                 Operands.push(num * Operands.pop());
             }
             if(numoroperator == DIV) {
-                Operands.push(num / Operands.pop());
+                Operands.push(Operands.pop() / num);
             }
         }
     }
