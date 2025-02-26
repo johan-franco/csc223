@@ -48,6 +48,10 @@ TEST_CASE("Test split_on_spaces") {
     CHECK(test[4] == "5");
     CHECK(test[5] == "6");
 }
+
+TEST_CASE("Testing eval_postfix ") {
+    CHECK(eval_postfix_expr("5 4 + 2 *" ) == 18);
+}
 /* work in progress
 TEST_CASE("Test stack of user defined class") {
     Stack<Node<int>*> NumAnimals;

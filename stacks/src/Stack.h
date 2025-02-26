@@ -41,7 +41,7 @@ vector<string> splitspaces(string input) {
 int eval_postfix_expr(string s) {
     Stack<int> Operands;
     vector<string> proc = splitspaces(s);
-    for(int i = 0; i < size(proc); i++) {
+    for(int i = 0; i < proc.size(); i++) {
         string vecval = proc[i];
         int numoroperator = vecval[0] - '0'; 
         if(numoroperator >= 0) {
@@ -64,4 +64,5 @@ int eval_postfix_expr(string s) {
             }
         }
     }
+    return Operands.top();
 }
