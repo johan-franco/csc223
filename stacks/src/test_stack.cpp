@@ -54,6 +54,16 @@ TEST_CASE("Testing eval_postfix ") {
     CHECK(eval_postfix_expr("12 2 * 4 +") == 28);
     CHECK(eval_postfix_expr("11 6 3 / 4 + -") == 5);
 }
+
+TEST_CASE("Test is_valid_infix_expression") {
+    string expr1 = "(4 + a) / c";
+    CHECK(is_valid_infix_expression(expr1) == true);
+    string expr2 = "(x * ((5 - d) + c) - y) * 2";
+    CHECK(is_valid_infix_expression(expr2) == true);
+    string expr3 = "(x * ((5 - d) + c - y) * 2";
+    CHECK(is_valid_infix_expression(expr3) == false);
+}
+
 /* work in progress
 TEST_CASE("Test stack of user defined class") {
     Stack<Node<int>*> NumAnimals;

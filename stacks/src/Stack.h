@@ -36,6 +36,29 @@ vector<string> splitspaces(string input) {
     }
     return output;
 }
+bool is_valid_infix_expression(string input) {
+    int parenum = 0;
+    Stack<string> expression;
+    vector<string> proc = splitspaces(input);
+    for(int i = 0; i < proc.size() ; i++) {
+        string vecval = proc[i];
+        for(int j = 0; j < vecval.length();j++) {
+            if(vecval[j] == '(') {
+                parenum++;
+                continue;
+            }
+            if(vecval[j] == ')') {
+                parenum--;
+                continue;
+            }
+        }
+    }
+    if(parenum == 0) {
+        return true;
+    }
+    return false;
+
+}
 
 
 int eval_postfix_expr(string s) {
