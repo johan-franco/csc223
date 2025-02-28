@@ -66,10 +66,10 @@ TEST_CASE("Test is_valid_infix_expression") {
 }
 
 TEST_CASE("Test conversion from postfix to infix") {
+    //Convert will always start with parenthesis and will only have spaces between nums and operators but not parentheses
     CHECK(convertpost_to_infix("11 6 3 / 4 + -") == "(11 - ((6 / 3) + 4))");
     //test to see if converstion is a valid infix
     CHECK(is_valid_infix_expression(convertpost_to_infix("11 6 3 / 4 + -")) == true);
-
 }
 /* work in progress
 TEST_CASE("Test stack of user defined class") {
