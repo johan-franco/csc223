@@ -36,6 +36,7 @@ vector<string> splitspaces(string input) {
     }
     return output;
 }
+
 bool is_valid_infix_expression(string input) {
     int parenum = 0;
     Stack<string> expression;
@@ -88,4 +89,35 @@ int eval_postfix_expr(string s) {
         }
     }
     return Operands.top();
+}
+
+string convertpost_to_infix(string s) {
+    int prevop = -1;
+    Stack<string> Equation;
+    vector<string> proc = splitspaces(s);
+    for(int i = 0; i < proc.size(); i++) {
+        string vecval = proc[i];
+        int numoroperator = vecval[0] - '0'; 
+        if(numoroperator >= 0) {
+            Equation.push(vecval);
+        }
+        else {
+            string num = Equation.pop();
+                if(numoroperator == ADD) {
+                    Equation.push( "(" + Equation.pop() + " + "+ num + ")");
+                }
+                if(numoroperator == SUB) {
+                    Equation.push("(" + Equation.pop() + " - " +  num + ")");
+                }
+                if(numoroperator == MULT) {
+                    Equation.push("(" + num + " * "+ Equation.pop() + ")");
+                }
+                if(numoroperator == DIV) {
+                    Equation.push("(" + Equation.pop() + " / " + num + ")");
+                }
+
+        }
+    }
+    
+    return Equation.top();
 }
