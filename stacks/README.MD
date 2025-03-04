@@ -14,6 +14,15 @@ A postfix expression is a format that some scientific calculators use to evaluat
 ## Code:
 
 ```cpp
+vector<string> splitspaces(string input) {
+    stringstream ss(input);
+    vector<string> output;
+    string nums;
+    while (ss >> nums) {
+        output.push_back(nums);
+    }
+    return output;
+}
 //all comments are from anar and testcases as well
 int eval_postfix_expr(string s) {
     Stack<int> Operands;                        
@@ -71,6 +80,16 @@ int eval_postfix_expr(const string& exp){
         }
     }
     return operands.pop();
+}
+
+vector<string> split_on_spaces(string expression){
+    stringstream ss(expression);
+    vector<string> exp_vector;
+    string item;
+    while(ss >> item){
+        exp_vector.push_back(item);
+    }
+    return exp_vector;
 }
 ```
 
