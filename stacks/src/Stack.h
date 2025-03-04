@@ -115,5 +115,5 @@ string convertpost_to_infix(string s) {
                 }
         }
     }    
-    return Equation.top();
+    return Equation.pop();
 }

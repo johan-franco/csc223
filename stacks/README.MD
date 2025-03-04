@@ -52,7 +52,7 @@ int eval_postfix_expr(string s) {
             }
         }
     }
-    return Operands.top();            //Return evaluated result to top of stack
+    return Operands.pop();            //Return evaluated result to top of stack
 }
 ```
 
