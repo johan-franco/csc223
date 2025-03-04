@@ -3,14 +3,15 @@
 ## What is a Post-fix Expression 
 A postfix expression is a format that some scientific calculators use to evaluate expressions. The more normal format is infix, where operators are between two operands.  A post-fix expression has the operators follow the operand.
 
-Post-fix example: 11 6 3 / 4 + -
-Infix example: (11 - ((6 / 3) + 4))
+- Post-fix example: 11 6 3 / 4 + -
+- Infix example: (11 - ((6 / 3) + 4))
 
 "A Stack helps to manage the data in the 'Last in First out' method. When the variable is not used outside the function in any program, the Stack can be used. It allows you to control and handle memory allocation and deallocation." - [BYJU](https://byjus.com/gate/stack-and-its-applications/#:~:text=A%20Stack%20helps%20to%20manage,handle%20memory%20allocation%20and%20deallocation.)
 
 
 ![stack](s.png)
 
+Johan:
 ```cpp
 int eval_postfix_expr(string s) {
     Stack<int> Operands;                        
@@ -44,6 +45,61 @@ int eval_postfix_expr(string s) {
 }
 ```
 
+Anfal:
+```cpp
+int eval_postfix_expr(const string& exp){
+    vector<string> exp_vector = split_on_spaces(exp); // Full Expression in a Vector
+    Stack<int> operands; // Stack of the operands
+    for(const auto& item : exp_vector){
+        if(isdigit(item[0])){
+            operands.push(stoi(item));
+        }else{
+            int right = operands.pop();
+            int left = operands.pop();
+
+            if(item[0] == '+'){
+                operands.push(left + right);
+            }else if(item[0] == '-'){
+                operands.push(left - right);
+            }else if(item[0] == '*'){
+                operands.push(left * right);
+            }else{
+                operands.push(left / right);
+            }
+        }
+    }
+    return operands.pop();
+}
+```
+
+Jamathiel
+```cpp
+int evaluatePostfix(const string &expression) {
+    stack<int> s;
+    stringstream ss(expression);
+    string token;
+
+    while (ss >> token) {
+        if (isdigit(token[0]) || (token.length() > 1 && token[0] == '-' && isdigit(token[1]))) {
+            s.push(stoi(token));
+        } else {
+            int operand2 = s.top(); s.pop();
+            int operand1 = s.top(); s.pop();
+
+            if (token == "+") {
+                s.push(operand1 + operand2);
+            } else if (token == "-") {
+                s.push(operand1 - operand2);
+            } else if (token == "*") {
+                s.push(operand1 * operand2);
+            } else if (token == "/") {
+                s.push(operand1 / operand2);
+            }
+        }
+    }
+    return s.top();
+}
+```
 Test Case: 
 
 ```cpp
@@ -55,7 +111,6 @@ TEST_CASE("Testing eval_postfix ") {
 ```
 
 ## Converting Post-Fix to Infix
-
 
 ```cpp
 string convertpost_to_infix(string s) {
