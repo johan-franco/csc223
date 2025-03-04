@@ -12,8 +12,9 @@ A postfix expression is a format that some scientific calculators use to evaluat
 ![stack](s.png)
 
 ## Code:
-Johan:
+
 ```cpp
+//all comments are from anar
 int eval_postfix_expr(string s) {
     Stack<int> Operands;                        
     vector<string> proc = splitspaces(s);       //Splits the postfix expression into an array of strings
