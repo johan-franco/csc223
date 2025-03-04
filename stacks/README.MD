@@ -6,7 +6,7 @@ A postfix expression is a format that some scientific calculators use to evaluat
 Post-fix example: 11 6 3 / 4 + -
 Infix example: (11 - ((6 / 3) + 4))
 
-"A Stack helps to manage the data in the 'Last in First out' method. When the variable is not used outside the function in any program, the Stack can be used. It allows you to control and handle memory allocation and deallocation."
+"A Stack helps to manage the data in the 'Last in First out' method. When the variable is not used outside the function in any program, the Stack can be used. It allows you to control and handle memory allocation and deallocation." - [BYJU](https://byjus.com/gate/stack-and-its-applications/#:~:text=A%20Stack%20helps%20to%20manage,handle%20memory%20allocation%20and%20deallocation.)
 
 
 ![stack](last-in-first-out-in-stack.png)
