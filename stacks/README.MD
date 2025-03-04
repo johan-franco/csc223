@@ -66,10 +66,10 @@ string convertpost_to_infix(string s) {
         string vecval = proc[i];
         int numoroperator = vecval[0] - '0'; 
         if(numoroperator >= 0) {
-            Equation.push(vecval);
+            Equation.push(vecval); // if num push into stack
         }
         else {
-            string num = Equation.pop();
+            string num = Equation.pop(); //if opperator pop and do operation wrapped in parentheses
                 if(numoroperator == ADD) {
                     Equation.push( "(" + Equation.pop() + " + "+ num + ")");
                 }
