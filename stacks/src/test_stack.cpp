@@ -53,7 +53,6 @@ TEST_CASE("Testing eval_postfix ") {
     CHECK(eval_postfix_expr("5 4 + 2 *" ) == 18);
     CHECK(eval_postfix_expr("12 2 * 4 +") == 28);
     CHECK(eval_postfix_expr("11 6 3 / 4 + -") == 5);
-    //                       11 - ((6/3) + 4)
 }
 
 TEST_CASE("Test is_valid_infix_expression") {

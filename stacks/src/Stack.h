@@ -58,9 +58,7 @@ bool is_valid_infix_expression(string input) {
         return true;
     }
     return false;
-
 }
-
 
 int eval_postfix_expr(string s) {
     Stack<int> Operands;
@@ -115,9 +113,7 @@ string convertpost_to_infix(string s) {
                 if(numoroperator == DIV) {
                     Equation.push("(" + Equation.pop() + " / " + num + ")");
                 }
-
         }
-    }
-    
+    }    
     return Equation.top();
 }

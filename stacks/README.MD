@@ -3,6 +3,8 @@
 ## What is a Post-fix Expression 
 A postfix expression is a format that some scientific calculators use to evaluate expressions. The more normal format is infix, where operators are between two operands.  A post-fix expression has the operators follow the operand.
 
+Post-fix example: 11 6 3 / 4 + -
+Infix example: (11 - ((6 / 3) + 4))
 ```cpp
 int eval_postfix_expr(string s) {
     Stack<int> Operands;                        
@@ -35,6 +37,17 @@ int eval_postfix_expr(string s) {
     return Operands.top();            //Return evaluated result to top of stack
 }
 ```
+
+Test Case: 
+
+```cpp
+TEST_CASE("Testing eval_postfix ") {
+    CHECK(eval_postfix_expr("5 4 + 2 *" ) == 18);
+    CHECK(eval_postfix_expr("12 2 * 4 +") == 28);
+    CHECK(eval_postfix_expr("11 6 3 / 4 + -") == 5);
+}
+```
+
 ## Converting Post-Fix to Infix
 
 
@@ -70,4 +83,13 @@ string convertpost_to_infix(string s) {
     return Equation.top();
 }
 ```
-test
+Test Case:
+
+```cpp
+TEST_CASE("Test conversion from postfix to infix") {
+    //Convert will always start with parenthesis and will only have spaces between nums and operators but not parentheses
+    CHECK(convertpost_to_infix("11 6 3 / 4 + -") == "(11 - ((6 / 3) + 4))");
+    //test to see if converstion is a valid infix
+    CHECK(is_valid_infix_expression(convertpost_to_infix("11 6 3 / 4 + -")) == true);
+}
+```
