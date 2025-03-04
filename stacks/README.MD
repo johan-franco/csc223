@@ -156,3 +156,6 @@ TEST_CASE("Test conversion from postfix to infix") {
     CHECK(is_valid_infix_expression(convertpost_to_infix("11 6 3 / 4 + -")) == true);
 }
 ```
+
+### Sources:
+[BYJU](https://byjus.com/gate/stack-and-its-applications/#:~:text=A%20Stack%20helps%20to%20manage,handle%20memory%20allocation%20and%20deallocation.)
