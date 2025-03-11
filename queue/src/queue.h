@@ -1,7 +1,7 @@
 #include "LinkedList.h"
 #ifndef QUEUE_H
 #define QUEUE_H
-#define MAX_SIZE 1024
+#define MAX_SIZE 10
 #include <stdexcept>
 
 

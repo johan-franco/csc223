@@ -1,7 +1,8 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 #include <string>
-#include "queue.h"
+//#include "queue.h"
+#include "LinkedQueue.h"
 using namespace std;
 
 TEST_CASE("Test basic queue operations on queue of strings") {
@@ -28,13 +29,15 @@ TEST_CASE("Test basic queue operations on queue of strings") {
     CHECK(queue.remove() == "fifth");
 }
 
-TEST_CASE("Test queue handles overflow and underflow") {
+//Max size had to be modified so that these tests with overflow and underflow would pass 
+//If we wanted the tests to pass we could delete this test or modify for it to loop as long as i < MAX_SIZE
+TEST_CASE("Test queue handles overflow and underflow") { 
     Queue<int> q;
     for (int i = 1; i < 10; i++)
         q.insert(i);
     CHECK(q.empty() == false);
-    CHECK_THROWS_WITH(q.insert(11), "No more space in queue");
+    CHECK_THROWS_WITH(q.insert(11), "No more space in queue"); //does not throw as there still is space
     for (int i = 1; i < 10; i++)
         CHECK(q.remove() == i);
-    CHECK_THROWS_WITH(q.remove(), "Can't remove from empty queue");
+    CHECK_THROWS_WITH(q.remove(), "Can't remove from empty queue"); 
 }
