@@ -45,12 +45,12 @@ struct LinkedList
 
     void insert_at_end(T cargo){
         Node<T>* traveler = this->head;
-        Node<T>* back = new Node<T>(cargo);
+        Node<T>* back = new Node<T>(cargo, nullptr);
 
         for(int i =0; i < num_nodes; i++ ) {
             traveler = traveler->next;
         }
-        traveler->next == back;
+        traveler->next = back;
         num_nodes++;
     };
 

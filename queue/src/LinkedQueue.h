@@ -5,7 +5,7 @@ class Queue : public LinkedList<T>
 {
   public:
     // constructors
-    Queue() = LinkedList();
+    Queue() = default;
 
     // modifiers
     void insert(T item) {
