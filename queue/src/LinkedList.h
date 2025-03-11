@@ -17,6 +17,11 @@ struct Node {
         this->cargo = cargo;
         this->next = next;
     }
+    Node(T cargo){
+        this->cargo = cargo;
+        this->next = nullptr;
+    }
+
 
     string to_string() const    {
         return string(cargo);
@@ -44,14 +49,23 @@ struct LinkedList
     };
 
     void insert_at_end(T cargo){
-        Node<T>* traveler = this->head;
-        Node<T>* back = new Node<T>(cargo, nullptr);
-
-        for(int i =0; i < num_nodes; i++ ) {
-            traveler = traveler->next;
+        if (head == nullptr) {
+            this->insert_at_front(cargo);
         }
-        traveler->next = back;
-        num_nodes++;
+        Node<T>* traveler = head;
+        Node<T>* back = new Node<T>(cargo);
+        if (head->next == nullptr) {
+            head->next = back;
+            delete traveler;  
+        }
+        else { 
+            while (traveler->next != nullptr) {
+                traveler = traveler->next;
+            }
+            traveler->next = back;
+            delete traveler;
+            num_nodes++;
+        }
     };
 
     T remove_from_front() {

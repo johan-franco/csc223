@@ -37,6 +37,7 @@ TEST_CASE("Test queue handles overflow and underflow") {
         q.insert(i);
     CHECK(q.empty() == false);
     CHECK_THROWS_WITH(q.insert(11), "No more space in queue"); //does not throw as there still is space
+//For a linked list there 
     for (int i = 1; i < 10; i++)
         CHECK(q.remove() == i);
     CHECK_THROWS_WITH(q.remove(), "Can't remove from empty queue"); 
