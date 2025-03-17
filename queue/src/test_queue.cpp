@@ -36,8 +36,9 @@ TEST_CASE("Test queue handles overflow and underflow") {
     for (int i = 1; i < 10; i++)
         q.insert(i);
     CHECK(q.empty() == false);
-    CHECK_THROWS_WITH(q.insert(11), "No more space in queue"); //does not throw as there still is space
-//For a linked list there 
+
+    //For a linked list there is technically no max space (memory is added dynamically) but through modifying Linked Queue.h we can change that
+    CHECK_THROWS_WITH(q.insert(11), "No more space in queue"); 
     for (int i = 1; i < 10; i++)
         CHECK(q.remove() == i);
     CHECK_THROWS_WITH(q.remove(), "Can't remove from empty queue"); 

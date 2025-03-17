@@ -49,6 +49,7 @@ struct LinkedList
     };
 
     void insert_at_end(T cargo){
+        num_nodes++;
         if (head == nullptr) {
             this->insert_at_front(cargo);
         }
@@ -56,21 +57,19 @@ struct LinkedList
         Node<T>* back = new Node<T>(cargo);
         if (head->next == nullptr) {
             head->next = back;
-            delete traveler;  
         }
-        else { 
+        else {
             while (traveler->next != nullptr) {
                 traveler = traveler->next;
             }
             traveler->next = back;
-            delete traveler;
-            num_nodes++;
         }
     };
 
     T remove_from_front() {
-        if (head == nullptr)
+        if (head == nullptr) {
             throw runtime_error("Can't remove from and empty list!");
+        }
         T cargo = head->cargo;
         Node<T>* front = head;
         head = head->next;

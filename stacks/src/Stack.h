@@ -1,4 +1,4 @@
-#include "LinkedList.h"
+#include "../../linkedlists/src/LinkedList.h"
 #include <vector>
 #define ADD  -5
 #define MULT -6
