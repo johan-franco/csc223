@@ -1,8 +1,8 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 #include <string>
-//#include "queue.h"
-#include "LinkedQueue.h"
+#include "queue.h"
+//#include "LinkedQueue.h"
 using namespace std;
 
 TEST_CASE("Test basic queue operations on queue of strings") {
