@@ -9,7 +9,8 @@ class Queue : public LinkedList<T>
     static const int MAX_SIZE = 10;
 
     void insert(T item) {
-        if (LinkedList<T>::length()+1 >= MAX_SIZE) {
+        
+        if ((LinkedList<T>::length()+1)% MAX_SIZE == 0) {
             throw std::runtime_error("No more space in queue");
         }
         if (this->empty()){
