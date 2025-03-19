@@ -23,6 +23,16 @@ public:
         if (last - first + 1 >= MAX_SIZE) {
             throw std::overflow_error("No more space in queue");
         }
+//This if statement shifts when array reaches the end
+//This approach is likely better as shifting at each removal would be extremely long if MAX_SIZE was a large value.
+//
+        if (last == MAX_SIZE) {
+            for(int i = first; i <= last; i++) {
+                items[i-first] = items[i];
+            }
+            last = last - first;
+            first = 0;
+        }
         items[last] = value;
         last++;
     }
@@ -32,7 +42,12 @@ public:
             throw std::underflow_error("Can't remove from empty queue");
         }
         T oldfirst = items[first];
-        last--;
+        /* //shifts to beginning during beginning of the array whenever an item is removed from the queue
+        for(int i = 0; i < last; i++) {
+            items[i] = items[i+1];
+        }*/
+        first++; //isn't necessary if we shift to beggining at every removal
+        //last--; necessary if we shift at begginning at every removal
         return oldfirst;
     }
 
