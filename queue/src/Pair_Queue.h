@@ -22,8 +22,8 @@ class RGTPQ {
     int first;
     int last;
     int completed;
-    RGThing items[MAX_SIZE];
-    RGTpair pairs[MAX_SIZE/2];
+    //RGThing items[MAX_SIZE];
+    RGTpair items[MAX_SIZE/2];
 
 public:
     RGTPG() {
