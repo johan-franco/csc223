@@ -48,7 +48,7 @@ TEST_CASE("Test multiple pairs with FIFO order") {
     CHECK(pair3.thing2.label == "Green3");
 }
 
-TEST_CASE("Test edge cases") {
+TEST_CASE("Test Underflow") {
     RGTPQ pq;
     
     pq.insert({RED, "Red1"});
@@ -61,7 +61,7 @@ TEST_CASE("Test edge cases") {
     CHECK(pair.thing2.label == "Green1");
 }
 
-TEST_CASE("Test many insertions") {
+TEST_CASE("Test many insertions & Overflow") {
     RGTPQ pq;
     int TEST_SIZE = 10;
     
@@ -69,7 +69,9 @@ TEST_CASE("Test many insertions") {
         pq.insert({RED, "Red" + to_string(i)});
         pq.insert({GREEN, "Green" + to_string(i)});
     }
-    
+    CHECK_THROWS_WITH(pq.insert({RED, "Overflow Red"}), "Red queue full");
+    CHECK_THROWS_WITH(pq.insert({GREEN, "Overflow Green"}), "Green queue full");
+
     for (int i = 0; i < TEST_SIZE; i++) {
         RGTpair pair = pq.remove();
         CHECK(pair.thing1.label == "Red" + to_string(i));

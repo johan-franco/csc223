@@ -61,6 +61,7 @@ public:
             greenSize++;
         }
     }
+    
     RGTpair remove() {
         if (redSize == 0 || greenSize == 0) {
             throw std::runtime_error("Cannot form a pair - missing one color");
