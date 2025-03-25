@@ -11,7 +11,7 @@ TEST_CASE("Test basic RGTPQ operations") {
     
     CHECK(pq.empty() == true);
     
-    CHECK_THROWS_WITH(pq.remove(), "Cannot form a pair - missing one color");
+    CHECK_THROWS_WITH(pq.remove(), "Cannot form a pair");
     
     pq.insert({RED, "Red1"});
     CHECK(pq.empty() == false); //Even if full pair isn't present it isn't empty
@@ -41,7 +41,7 @@ TEST_CASE("Test multiple pairs with FIFO order") {
     CHECK(pair2.thing1.label == "Red2");
     CHECK(pair2.thing2.label == "Green2");
     
-    CHECK_THROWS_WITH(pq.remove(), "Cannot form a pair - missing one color");
+    CHECK_THROWS_WITH(pq.remove(), "Cannot form a pair");
     
     pq.insert({GREEN, "Green3"});
     RGTpair pair3 = pq.remove();
@@ -54,7 +54,7 @@ TEST_CASE("Test Underflow") {
     
     pq.insert({RED, "Red1"});
     pq.insert({RED, "Red2"});
-    CHECK_THROWS_WITH(pq.remove(), "Cannot form a pair - missing one color");
+    CHECK_THROWS_WITH(pq.remove(), "Cannot form a pair");
     
     pq.insert({GREEN, "Green1"});
     RGTpair pair = pq.remove();

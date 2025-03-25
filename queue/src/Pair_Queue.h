@@ -18,8 +18,7 @@ struct RGTpair {
     RGThing thing2;
 };
 
-/*I've decidied to implement this as an two queue that shifts after reaching the maximum. Soecifically 
-the queue is an array that holds RGTpairs  */
+/*I've decidied to implement this as an two queue that is circular array (due to modulus). */
 class RGTPQ {
     RGThing redQueue[MAX_SIZE];
     int redFront;
@@ -61,10 +60,11 @@ public:
             greenSize++;
         }
     }
-    
+
+//Main difference is that we return pair and define the pair based on the front of both queues
     RGTpair remove() {
         if (redSize == 0 || greenSize == 0) {
-            throw std::runtime_error("Cannot form a pair - missing one color");
+            throw std::runtime_error("Cannot form a pair");
         }
 
         RGTpair pair;
