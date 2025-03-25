@@ -1,6 +1,7 @@
 using namespace std;
 #include <algorithm> 
 #include <iostream>
+#ifndef QUEUE_H
 #include <string>
 #define MAX_SIZE 10
 
@@ -31,7 +32,7 @@ class RGTPQ {
     int greenSize;
 
 public:
-    RGTpair RGTPG() {
+    RGTPQ() {
         greenFront = 0;
         greenBack = 0;
         greenSize = 0;
@@ -60,16 +61,23 @@ public:
             greenSize++;
         }
     }
-/*
-    T remove() {
-        if (empty()) {
-            throw std::underflow_error("Can't remove from empty queue");
+    RGTpair remove() {
+        if (redSize == 0 || greenSize == 0) {
+            throw std::runtime_error("Cannot form a pair - missing one color");
         }
-        int oldfirst = first;
-        first = (first + 1) % MAX_SIZE;
-        return items[oldfirst];
+
+        RGTpair pair;
+        pair.thing1 = redQueue[redFront];
+        pair.thing2 = greenQueue[greenFront];
+        
+        redFront = (redFront + 1) % MAX_SIZE;
+        greenFront = (greenFront + 1) % MAX_SIZE;
+        redSize--;
+        greenSize--;
+
+        return pair;
     }
-*/
+
     bool empty() const {
         return redSize == 0 && greenSize == 0;
     }
@@ -77,3 +85,4 @@ public:
 };
 
 
+#endif // QUEUE_H

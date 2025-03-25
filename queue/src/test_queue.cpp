@@ -1,46 +1,80 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 #include <string>
-#include "noncircular.h"
-//#include "queue.h"
-//#include "LinkedQueue.h"
+#include "Pair_Queue.h"
+#define MAX_SIZE 10
+
 using namespace std;
 
-TEST_CASE("Test basic queue operations on queue of strings") {
-    Queue<string> queue;
-    CHECK(queue.empty() == true);
-    queue.insert("first");
-    CHECK(queue.empty() == false);
-    queue.insert("second");
-    queue.insert("third");
-    CHECK(queue.remove() == "first");
-    queue.insert("forth");
-    queue.insert("fifth");
-    queue.insert("sixth");
-    queue.insert("seventh");
-    queue.insert("eight");
-    queue.insert("nineth");
-    CHECK(queue.remove() == "second");
-    CHECK(queue.remove() == "third");
-    queue.insert("tenth");
-    queue.insert("eleventh");
-    CHECK(queue.remove() == "forth");
-    queue.insert("twelfth");
-    queue.insert("thirteenth");
-    CHECK(queue.remove() == "fifth");
+TEST_CASE("Test basic RGTPQ operations") {
+    RGTPQ pq;
+    
+    CHECK(pq.empty() == true);
+    
+    CHECK_THROWS_WITH(pq.remove(), "Cannot form a pair - missing one color");
+    
+    pq.insert({RED, "Red1"});
+    pq.insert({GREEN, "Green1"});
+    CHECK(pq.empty() == false);
+    
+    RGTpair pair = pq.remove();
+    CHECK(pair.thing1.label == "Red1");
+    CHECK(pair.thing2.label == "Green1");
+    CHECK(pq.empty() == true);
 }
 
-//Max size had to be modified so that these tests with overflow and underflow would pass 
-//If we wanted the tests to pass we could delete this test or modify for it to loop as long as i < MAX_SIZE
-TEST_CASE("Test queue handles overflow and underflow") { 
-    Queue<int> q;
-    for (int i = 1; i < 10; i++)
-        q.insert(i);
-    CHECK(q.empty() == false);
+TEST_CASE("Test multiple pairs with FIFO order") {
+    RGTPQ pq;
+    
+    pq.insert({RED, "Red1"});
+    pq.insert({GREEN, "Green1"});
+    pq.insert({RED, "Red2"});
+    pq.insert({GREEN, "Green2"});
+    pq.insert({RED, "Red3"});
+    
+    RGTpair pair1 = pq.remove();
+    CHECK(pair1.thing1.label == "Red1");
+    CHECK(pair1.thing2.label == "Green1");
+    
+    RGTpair pair2 = pq.remove();
+    CHECK(pair2.thing1.label == "Red2");
+    CHECK(pair2.thing2.label == "Green2");
+    
+    CHECK_THROWS_WITH(pq.remove(), "Cannot form a pair - missing one color");
+    
+    pq.insert({GREEN, "Green3"});
+    RGTpair pair3 = pq.remove();
+    CHECK(pair3.thing1.label == "Red3");
+    CHECK(pair3.thing2.label == "Green3");
+}
 
-    //For a linked list there is technically no max space (memory is added dynamically) but through modifying Linked Queue.h we can change that
-    CHECK_THROWS_WITH(q.insert(11), "No more space in queue"); 
-    for (int i = 1; i < 10; i++)
-        CHECK(q.remove() == i);
-    CHECK_THROWS_WITH(q.remove(), "Can't remove from empty queue"); 
+TEST_CASE("Test edge cases") {
+    RGTPQ pq;
+    
+    pq.insert({RED, "Red1"});
+    pq.insert({RED, "Red2"});
+    CHECK_THROWS_WITH(pq.remove(), "Cannot form a pair - missing one color");
+    
+    pq.insert({GREEN, "Green1"});
+    RGTpair pair = pq.remove();
+    CHECK(pair.thing1.label == "Red1");
+    CHECK(pair.thing2.label == "Green1");
+}
+
+TEST_CASE("Test many insertions") {
+    RGTPQ pq;
+    int TEST_SIZE = 10;
+    
+    for (int i = 0; i < TEST_SIZE; i++) {
+        pq.insert({RED, "Red" + to_string(i)});
+        pq.insert({GREEN, "Green" + to_string(i)});
+    }
+    
+    for (int i = 0; i < TEST_SIZE; i++) {
+        RGTpair pair = pq.remove();
+        CHECK(pair.thing1.label == "Red" + to_string(i));
+        CHECK(pair.thing2.label == "Green" + to_string(i));
+    }
+    
+    CHECK(pq.empty() == true);
 }
