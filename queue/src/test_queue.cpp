@@ -14,6 +14,7 @@ TEST_CASE("Test basic RGTPQ operations") {
     CHECK_THROWS_WITH(pq.remove(), "Cannot form a pair - missing one color");
     
     pq.insert({RED, "Red1"});
+    CHECK(pq.empty() == false); //Even if full pair isn't present it isn't empty
     pq.insert({GREEN, "Green1"});
     CHECK(pq.empty() == false);
     
