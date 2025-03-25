@@ -1,7 +1,9 @@
 using namespace std;
 #include <algorithm> 
-#include<iostream>
-#include<string>
+#include <iostream>
+#include <string>
+#define MAX_SIZE 10
+
 
 enum Color {RED, GREEN};
 
@@ -15,64 +17,50 @@ struct RGTpair {
     RGThing thing2;
 };
 
-/*I've decidied to implement this as an single queue that shifts after reaching the maximum. Soecifically 
-the queue is an array that holds RGTpair */
-template <class T>
+/*I've decidied to implement this as an two queue that shifts after reaching the maximum. Soecifically 
+the queue is an array that holds RGTpairs  */
 class RGTPQ {
-    int first;
-    int last;
-    int completed;
-    //RGThing items[MAX_SIZE];
-    RGTpair items[MAX_SIZE/2];
+    RGThing redQueue[MAX_SIZE];
+    int redFront;
+    int redBack;
+    int redSize;
+
+    RGThing greenQueue[MAX_SIZE];
+    int greenFront;
+    int greenBack;
+    int greenSize;
 
 public:
-    RGTPG() {
-        first = 0;
-        last = 0;
-        completed = 0;
+    RGTpair RGTPG() {
+        greenFront = 0;
+        greenBack = 0;
+        greenSize = 0;
+
+        redFront = 0;
+        redBack = 0;
+        redSize = 0;
     }
 
-    void insert(const T& value) {
-        if ((last + 1) % MAX_SIZE == first) {
-            throw std::overflow_error("No more space in queue");
+
+//Same concept with previous circular queue insert but with another if statement due to using two queues
+    void insert(RGThing thing) {
+        if (thing.color == RED) {
+            if (redSize == MAX_SIZE) {
+                throw std::overflow_error("Red queue full");
+            }
+            redQueue[redBack] = thing;
+            redBack = (redBack + 1) % MAX_SIZE;
+            redSize++;
+        } else {
+            if (greenSize == MAX_SIZE) {
+                throw std::overflow_error("Green queue full");
+            }
+            greenQueue[greenBack] = thing;
+            greenBack = (greenBack + 1) % MAX_SIZE;
+            greenSize++;
         }
-        int location = first;
-        for(location < )
-        items[last] = value;
-        last = (last + 1) % MAX_SIZE;
     }
-/*This insert function needs to take a thing and then place it into the first empty place in the items array
-
-*/
-    void insert(const RGThing value) {
-        if (completed + 1 >= MAX_SIZE) {
-            throw std::overflow_error("No more space in queue");
-        }
-        if (last == MAX_SIZE) {
-            for(int i = first; i <= last; i++) {
-                items[i-first] = items[i];
-            }
-            last = last - first;
-            first = 0;
-        }
-
-        int i = 0;
-        while(i <= last) {
-            RGTpair pair = items[i];
-            if(pair.thing1.label == NULL) {
-                items[i].thing1 == value;
-                break;
-            }
-            if (items[i].thing2 == NULL) {
-                items[i].thing2 == value;
-                break;
-            }
-            i++;
-        }
-        completed = i;
-        last++;
-    }
-
+/*
     T remove() {
         if (empty()) {
             throw std::underflow_error("Can't remove from empty queue");
@@ -81,9 +69,11 @@ public:
         first = (first + 1) % MAX_SIZE;
         return items[oldfirst];
     }
-
+*/
     bool empty() const {
-        return first == last;
+        return redSize == 0 && greenSize == 0;
     }
+
 };
-#endif // QUEUE_H
+
+
