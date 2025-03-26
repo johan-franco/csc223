@@ -18,7 +18,7 @@ struct RGTpair {
     RGThing thing2;
 };
 
-/*I've decidied to implement this as an two queue that is circular array (due to modulus). */
+/*I've decidied to implement this as an two queue that is  array with a circular buffer (due to modulus). */
 class RGTPQ {
     RGThing redQueue[MAX_SIZE];
     int redFront;
