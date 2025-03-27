@@ -17,8 +17,10 @@ class Card #unlike C++ classes aren't automatically private so we can use classe
     end
 
     def ==(other_card)
-        if @rank_strings[@@rank] != @rank_strings[other_card.rank]  or @suit_strings[@@suit] != @suit_strings[other_card.suit]
+        #the more simple way I kept trying to do wasn't working but this does
+        if @@rank != other_card.rank  or @@suit != other_card.suit
             return false
         end
         return true
+    end
 end
