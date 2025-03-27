@@ -6,17 +6,17 @@ class Card #unlike C++ classes aren't automatically private so we can use classe
         @@rank = r
     end
 
-    def to_string
+    def to_string()
         @suit_strings = ["None", "Clubs", "Diamonds",
         "Hearts", "Spades"]
 
         @rank_strings = ["Joker", "Ace", "2", "3", "4", "5", "6",
-        "7", "8", "9", "10", "Jack", "Queen",
-        "King"]
+        "7", "8", "9", "10", "Jack", "Queen", "King"]
         #if rank == 0 then return joker else return to_string ver of card
         return @@rank == 0 ? @rank_strings[@@rank] : @rank_strings[@@rank] + " of " + @suit_strings[@@suit]
     end
 
     def ==(other_card)
-        return ();
+        return @@rank == other_card.rank and @@suit == other_card.suit;
+    end
 end
