@@ -31,6 +31,7 @@ class RGTPQ : public PriorityQueue<RGThing> {
                 return;
             }
             int counter;
+            //Changed to make red begin from start of linkedlist
             if (rgt.color == RED) {
                 counter = 1;
                 while (counter <= PriorityQueue<RGThing>::LinkedList::length()) {
@@ -43,7 +44,7 @@ class RGTPQ : public PriorityQueue<RGThing> {
                             PriorityQueue<RGThing>::LinkedList::insert_item_at(rgt, counter - 1);
                             return;
                         } else {
-                            counter++;
+                            counter++; //+2 didn't work
                         }
                     } else {
                         counter++;
