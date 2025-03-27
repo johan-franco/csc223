@@ -16,4 +16,7 @@ class Card #unlike C++ classes aren't automatically private so we can use classe
         #if rank == 0 then return joker else return to_string ver of card
         return @@rank == 0 ? @rank_strings[@@rank] : @rank_strings[@@rank] + " of " + @suit_strings[@@suit]
     end
+
+    def ==(other_card)
+        return ();
 end

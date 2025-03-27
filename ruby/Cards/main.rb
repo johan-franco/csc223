@@ -1,5 +1,7 @@
+#brings card class
 require_relative 'Card'  
 
+#testing functionality
 card = Card.new(1, 2)  
 
 puts card.to_string  
