@@ -63,7 +63,7 @@ TEST_CASE("Test insert() and remove()") {
     CHECK(pair.thing1.color == RED);
     CHECK(pair.thing2.color == GREEN);
     CHECK(pair.thing1.label == "Red1");
-    CHECK(pair.thing2.label == "Green1"); // Because green1 was the first green to be pushed, it'll be at the front
+    CHECK(pair.thing2.label == "Green1"); 
 
     pair = rgtpq.remove();
 
@@ -86,4 +86,45 @@ TEST_CASE("Test insert() and remove()") {
     rgtpq.insert(greenThing2);
     rgtpq.insert(greenThing3);
     CHECK_THROWS_WITH(rgtpq.remove(), "Error: No red items left in queue.");
+}
+
+TEST_CASE("Testing first insert green") {
+    RGTPQ rgtpq;
+
+    struct RGThing redThing = {RED, "Red1"};
+    struct RGThing greenThing = {GREEN, "Green1"};
+
+    struct RGThing redThing2 = {RED, "Red2"};
+    struct RGThing greenThing2 = {GREEN, "Green2"};
+
+    struct RGThing redThing3 = {RED, "Red3"};
+    struct RGThing greenThing3 = {GREEN, "Green3"};
+
+    rgtpq.insert(greenThing);
+    rgtpq.insert(greenThing2);
+    rgtpq.insert(greenThing3);
+
+    rgtpq.insert(redThing);
+    rgtpq.insert(redThing2);
+    rgtpq.insert(redThing3);
+
+    RGTpair pair = rgtpq.remove();
+    CHECK(pair.thing1.color == RED);
+    CHECK(pair.thing2.color == GREEN);
+    CHECK(pair.thing1.label == "Red1");
+    CHECK(pair.thing2.label == "Green1");
+
+    pair = rgtpq.remove();
+
+    CHECK(pair.thing1.color == RED);
+    CHECK(pair.thing2.color == GREEN);
+    CHECK(pair.thing1.label == "Red2");
+    CHECK(pair.thing2.label == "Green2");
+    
+    pair = rgtpq.remove();
+    
+    CHECK(pair.thing1.color == RED);
+    CHECK(pair.thing2.color == GREEN);
+    CHECK(pair.thing1.label == "Red3");
+    CHECK(pair.thing2.label == "Green3");
 }

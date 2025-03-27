@@ -32,10 +32,10 @@ class RGTPQ : public PriorityQueue<RGThing> {
             }
             int counter;
             if (rgt.color == RED) {
-                counter = PriorityQueue<RGThing>::LinkedList::length();
-                while (counter > 0) {
+                counter = 1;
+                while (counter <= PriorityQueue<RGThing>::LinkedList::length()) {
                     if (PriorityQueue<RGThing>::LinkedList::get_item_at(counter).color == GREEN) {
-                        if (counter == 1) {
+                        if (PriorityQueue<RGThing>::LinkedList::length() == 1) {
                             PriorityQueue<RGThing>::LinkedList::insert_item_at(rgt, 0);
                             return;
                         }
@@ -43,10 +43,10 @@ class RGTPQ : public PriorityQueue<RGThing> {
                             PriorityQueue<RGThing>::LinkedList::insert_item_at(rgt, counter - 1);
                             return;
                         } else {
-                            counter -= 2;
+                            counter++;
                         }
                     } else {
-                        counter--;
+                        counter++;
                     }
                 }
                 //Fixed previously was using insert_item_at with counter as location instead of insert at end 
