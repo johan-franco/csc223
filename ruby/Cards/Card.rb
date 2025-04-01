@@ -43,5 +43,13 @@ class Card #unlike C++ classes aren't automatically private so we can use classe
         #self is how we reference the onject itself
         return !(self > (other_card) || self == other_card);
     end
+end
 
+class Deck
+    def initialize(num)
+        vector<Card> cards;
+        vector<Card> temp(num);
+        cards = temp;
+    end
+    
 end
