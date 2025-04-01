@@ -52,24 +52,23 @@ class Card #unlike C++ classes aren't automatically private so we can use classe
 end
 
 class Deck
+    attr_reader :cards #need this to able to use get .suit .rank etc
     def initialize(num)
-        @cards = Array.new(num, Card.new(0, 0));
-
+      @cards = Array.new(num) { Card.new(nil, nil) }  
     end
-
+  
     def set()
-        if @cards.size() == 52
-            s = 1
-            r = 1
-            i = 0
-            while s < 5
-                for r in 1..13 do
-                    @cards[i].suit = s
-                    @cards[i].rank = r
-                    i++
-                end
-                s++
-            end
+      if @cards.size == 52
+        i = 0
+        (1..4).each do |s|  
+          (1..13).each do |r| 
+            @cards[i].suit = s
+            @cards[i].rank = r
+            i += 1  
+          end
         end
+      else
+        puts "Deck must have exactly 52 cards to use set()."
+      end
     end
-end
+  end
