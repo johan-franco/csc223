@@ -25,4 +25,17 @@ class Card #unlike C++ classes aren't automatically private so we can use classe
         end
         return true
     end
+
+    def >(other_card)
+        #nil is so that it can continue to be evaluated 
+        #without any parentheses an error will occur as intepreter will be expecting : instead of "true"
+        @suit > other_card.suit ? (return true)  :  nil
+        
+        other_card.suit > @suit ? (return false) : nil
+
+        @rank > other_card.rank ? (return true ): nil
+
+        other_card.rank > @rank ? (return false ): nil
+        return false
+    end
 end

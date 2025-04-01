@@ -15,4 +15,10 @@ puts "#{card3.to_string}"
 #test overload of ==
 samecard = Card.new(1, 2)  
 
-puts "#{samecard == card}" #did not output expected value true
+puts "#{samecard == card}" 
+
+puts "#{samecard > card}" 
+
+puts "#{samecard > card2}" #should be true
+
+puts "#{card2 > card3}" #false
