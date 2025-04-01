@@ -26,3 +26,10 @@ puts "#{card2 > card3}" #false
 puts "#{samecard < card2}" #should be false
 
 puts "#{card2 < card3}" #true
+
+#testing initialize of deck
+
+deck = Deck.new(52)
+
+puts "#{deck.cards[1].to_string}"
+

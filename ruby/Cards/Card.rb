@@ -4,8 +4,14 @@ class Card #unlike C++ classes aren't automatically private so we can use classe
     def initialize(s,r) #can;t have mult initializers
         #apparently using @@ means that all cards have the same values across all instances
         #previously i used it because i thought it would be necessary for the other classes like deck.
-        @suit = s
-        @rank = r
+        if s == nil && r == nil
+            @suit = 0
+            @rank = 0
+        
+        else
+            @suit = s
+            @rank = r
+        end
     end
 
     def to_string()
@@ -47,9 +53,19 @@ end
 
 class Deck
     def initialize(num)
-        vector<Card> cards;
-        vector<Card> temp(num);
-        cards = temp;
+        @cards = Array.new(num, Card.new(0, 0));
+
+        if num == 52
+            s = 1
+            r = 1
+            i = 0
+            for s in 1..4 do 
+                for r in 1..13 do
+                    @cards[i].suit = s
+                    @cards[i].rank = r
+                    i++
+                end
+            end
+        end
     end
-    
 end
