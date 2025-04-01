@@ -55,16 +55,20 @@ class Deck
     def initialize(num)
         @cards = Array.new(num, Card.new(0, 0));
 
-        if num == 52
+    end
+
+    def set()
+        if @cards.size() == 52
             s = 1
             r = 1
             i = 0
-            for s in 1..4 do 
+            while s < 5
                 for r in 1..13 do
                     @cards[i].suit = s
                     @cards[i].rank = r
                     i++
                 end
+                s++
             end
         end
     end

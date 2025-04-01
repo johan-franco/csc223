@@ -30,6 +30,6 @@ puts "#{card2 < card3}" #true
 #testing initialize of deck
 
 deck = Deck.new(52)
-
+deck.set()
 puts "#{deck.cards[1].to_string}"
 
