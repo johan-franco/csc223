@@ -38,4 +38,10 @@ class Card #unlike C++ classes aren't automatically private so we can use classe
         other_card.rank > @rank ? (return false ): nil
         return false
     end
+
+    def <(other_card)
+        #self is how we reference the onject itself
+        return !(self > (other_card) || self == other_card);
+    end
+
 end

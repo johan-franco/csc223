@@ -22,3 +22,7 @@ puts "#{samecard > card}"
 puts "#{samecard > card2}" #should be true
 
 puts "#{card2 > card3}" #false
+
+puts "#{samecard < card2}" #should be false
+
+puts "#{card2 < card3}" #true
