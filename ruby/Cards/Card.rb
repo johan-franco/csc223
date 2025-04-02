@@ -54,7 +54,7 @@ end
 class Deck
     attr_reader :cards #need this to able to use get .suit .rank etc
     def initialize(num)
-      @cards = Array.new(num) { Card.new(nil, nil) }  
+      @cards = Array.new(num, Card.new(nil, nil))   
     end
   
     def set()
