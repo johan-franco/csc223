@@ -55,6 +55,7 @@ class Deck
     attr_reader :cards #need this to able to use get .suit .rank etc
     def initialize(num)
         #creates deck of cards that are all unique
+        @numberCards = num
         @cards = Array.new(num) { Card.new(nil, nil) } #@cards = Array.new(num, Card.new(nil, nil))   
     end
   
@@ -76,6 +77,7 @@ class Deck
     def shuffle
         @cards.each_index do |i|
             rand_card = rand(@cards.size)  # Random index between 0 and cards.size-1
+            #parralel assignment
             @cards[i], @cards[rand_card] = @cards[rand_card], @cards[i]  # Swap cards through changing values at the same time
         end
     end

@@ -7,6 +7,7 @@ class Blackjack
         @deck.set
         @deck.shuffle
         @player_hand = []
+        @player_number_cards = 0
         @player_score = 0
         #@dealer_hand
         #@dealer_score
@@ -20,10 +21,11 @@ class Blackjack
         2.times { @player_hand << @deck.cards.pop }
         @player_score = calculate_score(@player_hand)
 
-        (0..1).each do |r| 
+        @player_number_cards +=2
+        (0..(@player_number_cards-1)).each do |r| 
             puts "#{@player_hand[r].to_string()}"
         end
-    
+         
         self.play_round()
     end
     
