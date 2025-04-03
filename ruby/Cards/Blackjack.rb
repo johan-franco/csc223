@@ -13,7 +13,7 @@ class Blackjack
         #@dealer_score
     end
     
-    def start_game
+    def start_game()
         puts "Starting Game\n\n"
         puts "Try to get as close to 21 without going over.\n\n"
         
@@ -52,7 +52,7 @@ class Blackjack
         return score
     end
 
-    def play_round
+    def play_round()
         #need to output hands
         puts "Your Current Hand: \n"
         (0..(@player_number_cards-1)).each do |r| 
@@ -61,24 +61,34 @@ class Blackjack
         puts "Score: #{@player_score}\n\n"
         #recieve input on whether or not to deal or not to deal
         puts "Hit or Stand?"
+        self.player_input()
+        if @player_score > 21 
+            self.endgame()
+        else
+            self.play_round()
+        end
+
+    end
+
+    def player_input()
         decision = gets.chomp()
         #recieve whether or not they want to play again
         case decision
-        when "Hit" or "hit"
+        when "Hit" 
             @player_hand << @deck.cards.pop
             @player_score = self.calculate_score(@player_hand)
             @player_number_cards +=1
-
-            if @player_score > 21 
-                self.endgame()
-            else
-                self.play_round()
-        when "Stand" or "stand"
+        when "Stand" 
             self.endgame()
+        else
+            puts "Please put valid input"
+            self.player_input()
+        end
     end
 
-    def endgame
-        nil
+    def endgame()
+        if @player_score == 21
+            
         #output how you won or lost
         # potentially reset vars so new game can be initialized
     end
