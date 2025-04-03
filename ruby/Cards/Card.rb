@@ -54,7 +54,8 @@ end
 class Deck
     attr_reader :cards #need this to able to use get .suit .rank etc
     def initialize(num)
-      @cards = Array.new(num, Card.new(nil, nil))   
+        #creates deck of cards that are all unique
+        @cards = Array.new(num) { Card.new(nil, nil) } #@cards = Array.new(num, Card.new(nil, nil))   
     end
   
     def set()
@@ -71,4 +72,11 @@ class Deck
         puts "Deck must have exactly 52 cards to use set()."
       end
     end
-  end
+    #! means void (as in modifies object, doesn't return a new object that is shuffled)
+    def shuffle!
+        @cards.each_index do |i|
+            rand_card = rand(@cards.size)  # Random index between 0 and cards.size-1
+            @cards[i], @cards[rand_card] = @cards[rand_card], @cards[i]  # Swap cards
+        end
+    end
+end
