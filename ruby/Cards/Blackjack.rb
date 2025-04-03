@@ -1,4 +1,6 @@
+require_relative 'Card'  
 
+#currently im just trying to create a single player version of it
 class Blackjack
     def initialize
         @deck = Deck.new(52)
@@ -6,6 +8,8 @@ class Blackjack
         @deck.shuffle!
         @player_hand = []
         @player_score = 0
+        #@dealer_hand
+        #@dealer_score
     end
     
     def start_game
@@ -44,5 +48,15 @@ class Blackjack
     
         return score
     end
+
     def play_round
+        #need to output hands
+        #recieve input on whether or not to deal or not to deal
+        #recieve whether or not they want to play again
+        nil
+    end
+
 end
+
+game = Blackjack.new()
+game.start_game
