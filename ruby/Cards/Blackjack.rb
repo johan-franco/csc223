@@ -62,7 +62,7 @@ class Blackjack
         #recieve input on whether or not to deal or not to deal
         puts "Hit or Stand?"
         self.player_input()
-        if @player_score > 21 
+        if @player_score > 21 or @player_score == 21
             self.endgame()
         else
             self.play_round()
@@ -80,6 +80,7 @@ class Blackjack
             @player_number_cards +=1
         when "Stand" 
             self.endgame()
+            exit
         else
             puts "Please put valid input"
             self.player_input()
@@ -88,8 +89,22 @@ class Blackjack
 
     def endgame()
         if @player_score == 21
-            
-        #output how you won or lost
+            puts "You won! Congrats\n"
+            puts "This is the hand that you used to win:"
+            (0..(@player_number_cards-1)).each do |r| 
+                puts "#{@player_hand[r].to_string()}"
+            end
+
+        else
+            puts "You were unable to reach the score of 21"
+            puts "Your hand was: \n"
+            (0..(@player_number_cards-1)).each do |r| 
+                puts "#{@player_hand[r].to_string()}"
+            end
+            puts "The score you ended with was #{@player_score}\n\n"
+        end
+            #recieve input on whether or not to deal or not to deal
+        
         # potentially reset vars so new game can be initialized
     end
 end
