@@ -22,9 +22,6 @@ class Blackjack
         @player_score = calculate_score(@player_hand)
 
         @player_number_cards +=2
-        (0..(@player_number_cards-1)).each do |r| 
-            puts "#{@player_hand[r].to_string()}"
-        end
          
         self.play_round()
     end
@@ -57,11 +54,34 @@ class Blackjack
 
     def play_round
         #need to output hands
+        puts "Your Current Hand: \n"
+        (0..(@player_number_cards-1)).each do |r| 
+            puts "#{@player_hand[r].to_string()}"
+        end
+        puts "Score: #{@player_score}\n\n"
         #recieve input on whether or not to deal or not to deal
+        puts "Hit or Stand?"
+        decision = gets.chomp()
         #recieve whether or not they want to play again
-        nil
+        case decision
+        when "Hit" or "hit"
+            @player_hand << @deck.cards.pop
+            @player_score = self.calculate_score(@player_hand)
+            @player_number_cards +=1
+
+            if @player_score > 21 
+                self.endgame()
+            else
+                self.play_round()
+        when "Stand" or "stand"
+            self.endgame()
     end
 
+    def endgame
+        nil
+        #output how you won or lost
+        # potentially reset vars so new game can be initialized
+    end
 end
 
 game = Blackjack.new()
