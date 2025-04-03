@@ -73,7 +73,7 @@ class Deck
       end
     end
     #! means void (as in modifies object, doesn't return a new object that is shuffled)
-    def shuffle!
+    def shuffle
         @cards.each_index do |i|
             rand_card = rand(@cards.size)  # Random index between 0 and cards.size-1
             @cards[i], @cards[rand_card] = @cards[rand_card], @cards[i]  # Swap cards

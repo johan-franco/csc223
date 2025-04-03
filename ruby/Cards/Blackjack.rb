@@ -5,7 +5,7 @@ class Blackjack
     def initialize
         @deck = Deck.new(52)
         @deck.set
-        @deck.shuffle!
+        @deck.shuffle
         @player_hand = []
         @player_score = 0
         #@dealer_hand
@@ -19,6 +19,10 @@ class Blackjack
         # Deal initial 2 cards (from the front of deck) and adds it to the hand
         2.times { @player_hand << @deck.cards.pop }
         @player_score = calculate_score(@player_hand)
+
+        (0..1).each do |r| 
+            puts "#{@player_hand[r].to_string()}"
+        end
     
         self.play_round()
     end

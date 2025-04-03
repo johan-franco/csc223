@@ -31,7 +31,7 @@ puts "#{card2 < card3}" #true
 
 deck = Deck.new(52)
 deck.set()
-deck.shuffle!()
+deck.shuffle()
 (0..51).each do |r| #currently is repeating King of spades
     puts "#{deck.cards[r].to_string}"
 end
