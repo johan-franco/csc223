@@ -1,6 +1,5 @@
 require_relative 'Card'  
 
-#currently im just trying to create a single player version of it
 class Blackjack
     def initialize
         @deck = Deck.new(52)
@@ -59,15 +58,17 @@ class Blackjack
 
     def play_round()
         #need to output hands
-        puts "\nYour Current Hand: \n"
+        puts "\nYour Current Hand:  \n"
         (0..(@player_number_cards-1)).each do |r| 
             puts "#{@player_hand[r].to_string()}"
         end
+        puts "Score: #{@player_score}\n\n"
+
         puts "\nDealer's Current Hand \n"
         (0..(@dealer_number_cards-1)).each do |r| 
             puts "#{@dealer_hand[r].to_string()}"
         end
-        puts "Score: #{@player_score}\n\n"
+        puts "Score: #{@dealer_score}\n\n"
         #recieve input on whether or not to deal or not to deal
         puts "Hit or Stand?"
         self.player_input()
