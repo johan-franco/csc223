@@ -9,8 +9,10 @@ class Blackjack
         @player_hand = []
         @player_number_cards = 0
         @player_score = 0
-        #@dealer_hand
-        #@dealer_score
+        @dealer_hand = []
+        @dealer_score = 0
+        @dealer_number_cards = 0
+
     end
     
     def start_game()
@@ -21,11 +23,14 @@ class Blackjack
         2.times { @player_hand << @deck.cards.pop }
         @player_score = calculate_score(@player_hand)
 
+        2.times { @dealer_hand << @deck.cards.pop }
+        @dealer_score = calculate_score(@dealer_hand)
+
         @player_number_cards +=2
-         
+        @dealer_number_cards +=2
+
         self.play_round()
     end
-    
     
     def calculate_score(hand)
         score = 0
@@ -70,6 +75,16 @@ class Blackjack
 
     end
 
+    def dealerturn()
+        while @player_score > @dealer_score
+            if @player_score > 21
+                exit
+            end
+            @dealer_hand << @deck.cards.pop
+            @dealer_score = self.calculate_score(@dealer_hand)
+            @dealer_number_cards +=1
+        end
+    end
     def player_input()
         decision = gets.chomp()
         #recieve whether or not they want to play again
@@ -88,22 +103,35 @@ class Blackjack
     end
 
     def endgame()
-        if @player_score == 21
+        self.dealerturn()
+        if @player_score > @dealer_score%22
             puts "You won! Congrats\n"
             puts "This is the hand that you used to win:"
             (0..(@player_number_cards-1)).each do |r| 
                 puts "#{@player_hand[r].to_string()}"
             end
+            puts "Your Score: #{@player_score}\n\n"
+
+            puts "Here is the dealer's hand:"
+            (0..(@dealer_number_cards-1)).each do |r| 
+                puts "#{@dealer_hand[r].to_string()}"
+            end
+            puts "Dealer Score: #{@dealer_score}\n\n"
 
         else
-            puts "You were unable to reach the score of 21"
+            puts "The dealer beat you."
             puts "Your hand was: \n"
             (0..(@player_number_cards-1)).each do |r| 
                 puts "#{@player_hand[r].to_string()}"
             end
             puts "The score you ended with was #{@player_score}\n\n"
+
+            puts "The dealer's hand was: \n"
+            (0..(@dealer_number_cards-1)).each do |r| 
+                puts "#{@dealer_hand[r].to_string()}"
+            end
+            puts "Dealer Score: #{@dealer_score}\n\n"
         end
-            #recieve input on whether or not to deal or not to deal
         
         # potentially reset vars so new game can be initialized
     end
