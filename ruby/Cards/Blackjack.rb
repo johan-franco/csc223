@@ -59,9 +59,13 @@ class Blackjack
 
     def play_round()
         #need to output hands
-        puts "Your Current Hand: \n"
+        puts "\nYour Current Hand: \n"
         (0..(@player_number_cards-1)).each do |r| 
             puts "#{@player_hand[r].to_string()}"
+        end
+        puts "\nDealer's Current Hand \n"
+        (0..(@dealer_number_cards-1)).each do |r| 
+            puts "#{@dealer_hand[r].to_string()}"
         end
         puts "Score: #{@player_score}\n\n"
         #recieve input on whether or not to deal or not to deal
@@ -78,7 +82,7 @@ class Blackjack
     def dealerturn()
         while @player_score > @dealer_score
             if @player_score > 21
-                exit
+                return
             end
             @dealer_hand << @deck.cards.pop
             @dealer_score = self.calculate_score(@dealer_hand)
@@ -93,6 +97,10 @@ class Blackjack
             @player_hand << @deck.cards.pop
             @player_score = self.calculate_score(@player_hand)
             @player_number_cards +=1
+            if @player_score > 21
+                puts "\nBust! You went over 21."
+                self.endgame()
+            end
         when "Stand" 
             self.endgame()
             exit
@@ -104,7 +112,7 @@ class Blackjack
 
     def endgame()
         self.dealerturn()
-        if @player_score > @dealer_score%22
+        if @player_score%22 > @dealer_score
             puts "You won! Congrats\n"
             puts "This is the hand that you used to win:"
             (0..(@player_number_cards-1)).each do |r| 
@@ -117,6 +125,7 @@ class Blackjack
                 puts "#{@dealer_hand[r].to_string()}"
             end
             puts "Dealer Score: #{@dealer_score}\n\n"
+            exit
 
         else
             puts "The dealer beat you."
@@ -131,6 +140,7 @@ class Blackjack
                 puts "#{@dealer_hand[r].to_string()}"
             end
             puts "Dealer Score: #{@dealer_score}\n\n"
+            exit
         end
         
         # potentially reset vars so new game can be initialized
