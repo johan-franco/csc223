@@ -46,13 +46,13 @@ class Blackjack
                 score += card.rank
             end
         end
-    
+     
         # Adjust for aces if score is over 21
         while score > 21 && aces > 0
             score -= 10
             aces -= 1
         end
-    
+        
         return score
     end
 
@@ -85,6 +85,9 @@ class Blackjack
             if @player_score > 21
                 return
             end
+            if @dealer_score > 21
+                @dealer_score = 0
+            end
             @dealer_hand << @deck.cards.pop
             @dealer_score = self.calculate_score(@dealer_hand)
             @dealer_number_cards +=1
@@ -113,7 +116,7 @@ class Blackjack
 
     def endgame()
         self.dealerturn()
-        if @player_score%22 > @dealer_score
+        if @player_score%22 > @dealer_score or (@dealer_score > 21)
             puts "You won! Congrats\n"
             puts "This is the hand that you used to win:"
             (0..(@player_number_cards-1)).each do |r| 
