@@ -1,22 +1,27 @@
-
+# mergesort  continuosly divides an array until it is singular element.After it begins to merge arrays after sorting them
 def merge_sort(array)
   
+    #stops function from continuosly calling itself when length of array is 1
     if array.length == 1
       return array
     end
   
+    #split arrays in half
     middle = (array.length / 2).to_i
   
+    #The split array
     small_1 = merge_sort(array[0, middle])
     small_2 = merge_sort(array[middle, array.length - 1])
   
     array_to_return = []
   
+    #loop ends when both split array sizes are zero
     until small_1.size == small_2.size and small_1.size == 0
       if small_1.size == 0
         array_to_return.push(small_2.shift)
       elsif small_2.size == 0
         array_to_return.push(small_1.shift)
+    #Adds element to array_to_return on which is greater than the other also removes larger element from split array
       elsif small_1[0] < small_2[0]
         array_to_return.push(small_1.shift)
       else
@@ -26,7 +31,7 @@ def merge_sort(array)
   
     return array_to_return
   
-  end
+end
   
   def max(a, b)
     return a < b ? b : a
@@ -44,10 +49,11 @@ def merge_sort(array)
   class Node
     def initialize(data, left = nil, right = nil)
       @data = data
-      @left = left
-      @right = right
+      @left = left #tree child that is smaller than data
+      @right = right #tree child that is greater than data
     end
   
+    #getter functions
     def data
       @data
     end
@@ -59,7 +65,8 @@ def merge_sort(array)
     def right
       @right
     end
-  
+
+  #setter functions
     def set_left(new_left)
       @left = new_left
     end
@@ -72,6 +79,7 @@ def merge_sort(array)
       @data = new_data
     end
   
+    #method to print node
     def pretty_print(node = self, prefix = '', is_left = true)
       pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
       puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data ? node.data : "nil"}"
@@ -81,8 +89,11 @@ def merge_sort(array)
   end
   
   class Tree
+    #initalization of tree takes in array
     def initialize(array)
+    #root has no val at start
       @root = nil
+      #build_tree is called with the sorted array
       build_tree(merge_sort(array.uniq))
       p merge_sort(array.uniq)
     end
