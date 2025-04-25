@@ -94,27 +94,35 @@ end
     #root has no val at start
       @root = nil
       #build_tree is called with the sorted array
-      build_tree(merge_sort(array.uniq))
+      build_tree(merge_sort(array.uniq)) #.uniq removes any duplicate vals in array
+      #print version of array without dups
       p merge_sort(array.uniq)
     end
   
+    #build tree takes in array and boolean, boolean on default is true
     def build_tree(array, root_call = true)
   
+    #if array is one element create it as a Node  and return Node. Needed because we contiounosly call build_tree
       if array.length <= 1
         return Node.new(array[0])
       end
-  
+
+      #grab middle of the array that is passed in 
+      #At first call it will grab the full half of the array. Then it will grab a half of half of the array and so on..
       middle = (array.length / 2).to_i
   
       #left_node  = middle > 0 ? build_tree(array[0, middle], false) : nil
       #right_node = ((array.length - 1) - middle) > 0 ? build_tree(array[middle + 1, array.length - 1], false) : nil
   
       if middle > 0
+        #take in the sorted array's left half and call build_tree left half of array and set what it returns equal to the left_node. Also call with root_call as false
         left_node = build_tree(array[0, middle], false)
       else
+        #build_tree will continue to be called on the left part of the array until middle is zero.
         left_node = nil
       end
-  
+      
+      #if right half of array is greater than 0 call build_tree and set return equal to right_node. This will continuosly be called until right_node equals nil.
       if (array.length - 1) - middle > 0
         right_node = build_tree(array[middle + 1, array.length - 1], false)
       else
@@ -123,7 +131,7 @@ end
   
       tree = Node.new(array[middle], left_node, right_node)
   
-      if root_call
+      if root_call #root_call represents the first call. The first call would also be the top of the tree (root) as tree is built starting from the leaf nodes. 
         @root = tree
       end
   
