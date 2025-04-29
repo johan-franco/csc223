@@ -138,7 +138,19 @@ end
       return tree
   
     end
-  
+    
+    def min()
+        Node trav = @root 
+        while trav.left != nil
+            trav = trav.left
+        return trav.data
+
+    def max()
+        Node trav = @root 
+        while trav.right != nil
+            trav = trav.right
+        return trav.data
+    
     # not 100% if this is implemented correctly
     def insert(value)
       
