@@ -139,17 +139,7 @@ end
   
     end
     
-    def min()
-        Node trav = @root 
-        while trav.left != nil
-            trav = trav.left
-        return trav.data
 
-    def max()
-        Node trav = @root 
-        while trav.right != nil
-            trav = trav.right
-        return trav.data
     
     # not 100% if this is implemented correctly
     def insert(value)
@@ -499,3 +489,5 @@ end
   arr = []
   tree.postorder { |node| arr.push(node.data) }
   p arr
+
+  pretty_print()
