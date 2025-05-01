@@ -429,6 +429,8 @@ end
   
   random_array = Array.new(15) { rand(1..100) }
   
+  p random_array
+  
   tree = Tree.new(random_array)
   
   tree.pretty_print

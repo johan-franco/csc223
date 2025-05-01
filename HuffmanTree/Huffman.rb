@@ -1,54 +1,47 @@
 class HuffLeafNode
-    def initialize(element, weight = nil)
-        @char = element
-        @weight = 
+    def initialize(char, weight = nil)
+        @char = char
+        @weight = weight
     end
   
+    def isLeaf
+        return true
+    end
     #getter functions
-    def data
-      @data
+    def char
+        @char
     end
   
-    def left
-      @left
-    end
-  
-    def right
-      @right
+    def weight
+        @weight
     end
 
   #setter functions
-    def set_left(new_left)
-      @left = new_left
+    def set_weight(new_weight)
+        @weight = new_weight
     end
   
-    def set_right(new_right)
-      @right = new_right
+    def set_char(new_char)
+        @char = new_char
     end
-  
-    def set_data(new_data)
-      @data = new_data
-    end
-  
-    #method to print node
-    def pretty_print(node = self, prefix = '', is_left = true)
-      pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
-      puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data ? node.data : "nil"}"
-      pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
-    end
+
   
 end
 
 class HuffInternalNode
-    def initialize(data, left = nil, right = nil)
-      @data = data
-      @left = left #tree child that is smaller than data
-      @right = right #tree child that is greater than data
+    def initialize(char, left = nil, right = nil)
+        @weight = weight
+        @left = left 
+        @right = right 
+    end
+
+    def isLeaf
+        return false
     end
   
     #getter functions
-    def data
-      @data
+    def weight
+      @weight
     end
   
     def left
@@ -68,15 +61,22 @@ class HuffInternalNode
       @right = new_right
     end
   
-    def set_data(new_data)
-      @data = new_data
+    def set_weight(new_weight)
+      @weight = new_weight
     end
   
-    #method to print node
+    #
     def pretty_print(node = self, prefix = '', is_left = true)
       pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
       puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data ? node.data : "nil"}"
       pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
     end
-  
-  end
+  #
+end
+
+class HuffTree
+    #currently can't have root node as leaf
+    @root = HuffInternalNode.new(nil)
+
+    #need build_tree method. need to take in in array and start building from ground up
+end
