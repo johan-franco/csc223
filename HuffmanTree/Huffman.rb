@@ -29,7 +29,7 @@ class HuffLeafNode
 end
 
 class HuffInternalNode
-    def initialize(char, left = nil, right = nil)
+    def initialize(weight, left = nil, right = nil)
         @weight = weight
         @left = left 
         @right = right 
@@ -77,6 +77,18 @@ end
 class HuffTree
     #currently can't have root node as leaf
     @root = HuffInternalNode.new(nil)
+
+    def build_tree(chawei)
+        #transform all of input array elements into leaf nodes
+        leaf_nodes = chawei.map { |char, weight| HuffLeafNode.new(char,weight) }
+        
+        #sort array of leaf nodes by weight to build from the ground up ()
+        nodes = leaf_nodes.sort_by { |leafnode| leafnode.weight }
+
+        while nodes.size != 1
+            #need to take 2 elements from nodes out to create an internal node 
+            #then add internal node back into tree
+            #this should loop until only root element is left
 
     #need build_tree method. need to take in in array and start building from ground up
 end
