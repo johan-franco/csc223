@@ -114,15 +114,7 @@ class HuffTree
     end
 
     
-    def print_tree(node=@root, prefix="", is_left=true)
-        if node.isLeaf
-          puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.char}:#{node.weight}"
-        else
-          puts "#{prefix}#{is_left ? '└── ' : '┌── '}Node:#{node.weight}"
-          print_tree(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true)
-          print_tree(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false)
-        end
-      end
+
 end
 
 test_frequencies = [
@@ -144,24 +136,20 @@ actual_root_weight = tree.root.weight
 puts "\nVerification:"
 puts "Expected root weight: #{expected_root_weight}"
 puts "Actual root weight:   #{actual_root_weight}"
-tree.print_tree
 
 # testing insert
 tree.insert(['g', 8])
-puts "\nUpdated tree structure:"
 
 test_string = "abacab"
 encoded = tree.encode(test_string)
 decoded = tree.decode(encoded)
-puts "\nTest 1: Roundtrip '#{test_string}'"
+puts "\n Message: '#{test_string}'"
 puts "Encoded: #{encoded}"
 puts "Decoded: #{decoded}"
 
 # Test 2: Single character
 test_char = "f"
 encoded = tree.encode(test_char)
-puts "\nTest 2: Single character '#{test_char}'"
+puts "\n Single character '#{test_char}'"
 puts "Encoded: #{encoded}"  
 
-
-tree.print_tree
