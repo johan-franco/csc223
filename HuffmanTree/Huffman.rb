@@ -1,17 +1,3 @@
-class HuffLeafNode
-    attr_accessor :char, :weight
-    def initialize(char, weight = nil)
-        @char = char
-        @weight = weight
-    end
-  
-    def isLeaf
-        return true
-    end
-
-
-end
-
 class HuffInternalNode
     attr_accessor :left, :right, :weight
 
@@ -25,6 +11,31 @@ class HuffInternalNode
         return false
     end
 
+    def to_s
+        message = "#{@weight}"
+        return message
+    end
+
+end
+
+class HuffLeafNode < HuffInternalNode
+    attr_accessor :char, :weight
+    def initialize(char, weight = nil)
+        super(weight)
+        @char = char
+    end
+  
+    def isLeaf
+        return true
+    end
+
+    def to_s
+        message = super
+        message += "#{@char}"
+        return message
+    end
+
+
 end
 
 class HuffTree
@@ -37,12 +48,32 @@ class HuffTree
 
     end
     
+    def print_tree(node, left_accessor: nil, right_accessor: nil, value_accessor: nil, prefix: "", is_left: true)
+        return if node.nil? 
+        
+
+        left_accessor  ||= -> (n) { n.left }
+        right_accessor ||= -> (n) { n.right }
+        value_accessor ||= -> (n) { n.to_s }
+      
+        right_child = right_accessor.call(node)
+        left_child  = left_accessor.call(node)
+      
+        print_tree(right_child, left_accessor: left_accessor, right_accessor: right_accessor,
+                   value_accessor: value_accessor,
+                   prefix: prefix + (is_left ? "│   " : "    "), is_left: false)
+      
+        puts prefix + (is_left ? "└── " : "┌── ") + value_accessor.call(node)
+      
+        print_tree(left_child, left_accessor: left_accessor, right_accessor: right_accessor,
+                   value_accessor: value_accessor,
+                   prefix: prefix + (is_left ? "    " : "│   "), is_left: true)
+    end
 
     def build_tree(chawei)
         #transform all of input array elements into leaf nodes
         nodes = chawei.map { |char, weight| HuffLeafNode.new(char,weight) }
         
-
         while nodes.size != 1
             #sort array of leaf nodes by weight to build from the ground up ()
             nodes = nodes.sort_by { |node| node.weight }
@@ -180,3 +211,5 @@ test_char = "f"
 encoded = tree.encode(test_char)
 puts "\n Single character '#{test_char}'"
 puts "Encoded: #{encoded}"
+
+tree.print_tree(tree.root)

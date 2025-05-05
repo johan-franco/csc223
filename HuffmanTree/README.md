@@ -22,8 +22,8 @@ graph TD
     N14 -->|0| a[5: a]
 ```
 
-| Char    | Frequency | Code |
-| -------- | ------- | ------- |
+| Char | Frequency | Code |
+| - | ----- | ---- |
 | a |  5    | 1100 |
 | b |  9    | 1101 |
 | c |  12   | 100  |
