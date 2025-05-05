@@ -140,16 +140,39 @@ puts "Actual root weight:   #{actual_root_weight}"
 # testing insert
 tree.insert(['g', 8])
 
-test_string = "abacab"
+test_string = "abcdef"
 encoded = tree.encode(test_string)
 decoded = tree.decode(encoded)
 puts "\n Message: '#{test_string}'"
 puts "Encoded: #{encoded}"
 puts "Decoded: #{decoded}"
 
-# Test 2: Single character
-test_char = "f"
+test_char = "a"
 encoded = tree.encode(test_char)
 puts "\n Single character '#{test_char}'"
 puts "Encoded: #{encoded}"  
 
+test_char = "b"
+encoded = tree.encode(test_char)
+puts "\n Single character '#{test_char}'"
+puts "Encoded: #{encoded}"  
+
+test_char = "c"
+encoded = tree.encode(test_char)
+puts "\n Single character '#{test_char}'"
+puts "Encoded: #{encoded}"  
+
+test_char = "d"
+encoded = tree.encode(test_char)
+puts "\n Single character '#{test_char}'"
+puts "Encoded: #{encoded}"
+
+test_char = "e"
+encoded = tree.encode(test_char)
+puts "\n Single character '#{test_char}'"
+puts "Encoded: #{encoded}"
+
+test_char = "f"
+encoded = tree.encode(test_char)
+puts "\n Single character '#{test_char}'"
+puts "Encoded: #{encoded}"
