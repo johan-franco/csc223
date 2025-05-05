@@ -12,18 +12,19 @@ The [Huffman Coding Tree](https://en.wikipedia.org/wiki/Huffman_coding) has leaf
 graph TD
     Root[100] -->|0| f[45: f]
     Root -->|1| N55[55]
-    N55 -->|1| N25[25]
-    N55 -->|0| N30[30]
+    N55 -->|0| N25[25]
+    N55 -->|1| N30[30]
     N25 -->|0| c[12: c]
     N25 -->|1| d[13: d]
-    N30 -->|1| N14[14]
-    N30 -->|0| e[16: e]
+    N30 -->|0| N14[14]
+    N30 -->|1| e[16: e]
     N14 -->|1| b[9: b]
     N14 -->|0| a[5: a]
 ```
 
 ### My favorite word abcdef in
 #### Binary: 101010111100110111101111 
-#### Huffman: 1010 1011 110 111 100 0
+#### Huffman: 1100 1101 100 101 111 0
+
 
 [Additional Sources](https://opendsa-server.cs.vt.edu/ODSA/Books/Everything/html/Huffman.html)

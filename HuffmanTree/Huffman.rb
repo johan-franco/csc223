@@ -113,7 +113,6 @@ class HuffTree
         end
     end
 
-    
 
 end
 
@@ -137,8 +136,13 @@ puts "\nVerification:"
 puts "Expected root weight: #{expected_root_weight}"
 puts "Actual root weight:   #{actual_root_weight}"
 
-# testing insert
-tree.insert(['g', 8])
+
+test_string = "abcdef"
+encoded = tree.encode(test_string)
+decoded = tree.decode(encoded)
+puts "\nMessage:'#{test_string}'"
+puts "Encoded: #{encoded}"
+puts "Decoded: #{decoded}"
 
 test_string = "abcdef"
 encoded = tree.encode(test_string)
