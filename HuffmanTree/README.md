@@ -22,8 +22,8 @@ graph TD
     N14 -->|1| a[5: a]
 ```
 
-
-### Binary: 101010111100110111101111
-### Huffman: 1010111011111001100
+### My favorite word abcdef in
+#### Binary: 101010111100110111101111
+#### Huffman: 1010111011111001100
 
 [Additional Sources](https://opendsa-server.cs.vt.edu/ODSA/Books/Everything/html/Huffman.html)
