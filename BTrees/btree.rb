@@ -59,14 +59,16 @@ class BTree
     end
 
     def insert(val)
-        traverse(val).insert(val)
-    end
-    
-    def traverse(val)
-        if @roots.path.empty
-            return @root
+        if @root.paths.empty
+            @root.insert(val)
         else
-            #traverse using val
+            traverse(val)
         end
+    end
+
+    def traverse(val)
+
+        #traverse using val and prob return node that it should enter
+
     end
 end
