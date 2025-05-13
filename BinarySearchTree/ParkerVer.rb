@@ -1,6 +1,5 @@
 # mergesort  continuosly divides an array until it is singular element.After it begins to merge arrays after sorting them
 def merge_sort(array)
-  
     #stops function from continuosly calling itself when length of array is 1
     if array.length == 1
       return array
@@ -430,7 +429,7 @@ end
   random_array = Array.new(15) { rand(1..100) }
   
   p random_array
-  
+
   tree = Tree.new(random_array)
   
   tree.pretty_print

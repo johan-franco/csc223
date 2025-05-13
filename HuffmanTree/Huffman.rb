@@ -147,6 +147,8 @@ class HuffTree
 
 end
 
+
+
 test_frequencies = [
     ['a', 5],
     ['b', 9],
