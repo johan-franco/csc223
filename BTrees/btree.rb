@@ -15,12 +15,18 @@ class RootNode
             @values.insert(val)
             @values.sort!
             if paths.empty
-                paths[0] = Node.new(@values.slice(0,1))
-                paths[1] = Node.new(@values.slice(3,4))
-
+                ##if root is full without having any nodes it is pointing to
+                paths[0] = Node.new(@values.slice(0,@minval-1))
+                paths[1] = Node.new(@values.slice(@minval+1,@maxval))
+                @values = @values[@maxval/2]
 
             else
-                #do something else
+                #if root is full with path to nodes being present
+                lessernode = Node.new(@values.slice((0,@minval-1)))
+                greaternode = Node.new(@values.slice(@minval+1,@maxval))
+                lessernode.paths = @root.paths[0,@minval]
+                greaternode.paths = @root.paths[@minval+1, @maxval+1]
+                @root.paths = [lessernode, greaternode]
                 return
             end
             return
@@ -68,7 +74,7 @@ class BTree
 
     def traverse(val)
 
-        #traverse using val and prob return node that it should enter
+        #traverse using val and prob return node that it should return
 
     end
 end
