@@ -69,8 +69,19 @@ class BTree
     end
 
     def traverse(val)
-
         #traverse using val and prob return node that it should return
+        count = 0
+        until val < @root.values[count] do
+            count++
+            break if count == @root.values.length
+        end
+        nextnode = @root.paths[count]
+        if nextnode.paths == empty
+            return nextnode
 
+        else 
+            # need to continue traversing prob write a recursive function that takes in a node and returns node
+        end
+            
     end
 end
