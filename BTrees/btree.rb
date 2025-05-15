@@ -11,15 +11,15 @@ class RootNode
     end
 
     def insert(val)
-        if @values.length() == @maxval
-            @values.insert(val)
-            @values.sort!
+        @values.insert(val)
+        @values.sort!
+        if @values.length() >= @maxval
             if paths.empty
                 ##if root is full without having any nodes it is pointing to
                 paths[0] = Node.new(@values.slice(0,@minval-1))
                 paths[1] = Node.new(@values.slice(@minval+1,@maxval))
                 @values = @values[@maxval/2]
-
+                return
             else
                 #if root is full with path to nodes being present
                 lessernode = Node.new(@values.slice((0,@minval-1)))
@@ -27,13 +27,9 @@ class RootNode
                 lessernode.paths = @root.paths[0,@minval]
                 greaternode.paths = @root.paths[@minval+1, @maxval+1]
                 @root.paths = [lessernode, greaternode]
+                @values = @values[@maxval/2]
                 return
             end
-            return
-        else 
-            @values.insert(val)
-            @values.sort!
-            update_paths()
         end
     
     end
