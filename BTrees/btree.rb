@@ -11,21 +11,22 @@ class RootNode
     end
 
     def insert(val)
-        @values.insert(val)
+        @values << val
         @values.sort!
+        minval = @maxval/2 
         if @values.length() >= @maxval
-            if paths.empty
+            if paths.empty?
                 ##if root is full without having any nodes it is pointing to
-                paths[0] = Node.new(@values.slice(0,@minval-1))
-                paths[1] = Node.new(@values.slice(@minval+1,@maxval))
+                paths[0] = Node.new(@values.slice(0,minval-1))
+                paths[1] = Node.new(@values.slice(minval+1,@maxval))
                 @values = @values[@maxval/2]
                 return
             else
                 #if root is full with path to nodes being present
-                lessernode = Node.new(@values.slice((0,@minval-1)))
-                greaternode = Node.new(@values.slice(@minval+1,@maxval))
-                lessernode.paths = @root.paths[0,@minval]
-                greaternode.paths = @root.paths[@minval+1, @maxval+1]
+                lessernode = Node.new(@values.slice(0,minval-1))
+                greaternode = Node.new(@values.slice(minval+1,@maxval))
+                lessernode.paths = @root.paths[0,minval]
+                greaternode.paths = @root.paths[minval+1, @maxval+1]
                 @root.paths = [lessernode, greaternode]
                 @values = @values[@maxval/2]
                 return
@@ -42,7 +43,7 @@ end
 
 class Node < RootNode
     attr_accessor :minval
-    def initialize(val = nil)
+    def initialize(val = [])
         super
         @values = val
         @minval = @maxval/2
@@ -50,6 +51,18 @@ class Node < RootNode
 
     def isRoot
         return false
+    end
+
+    def traverse(val)
+        return self if @paths.empty?        
+        count = 0
+        until val < self.values[count] do
+            count+=1
+            #if this occurs that means val is greater than all of them 
+            break if count == @root.values.length
+        end
+        nextnode = self.paths[count]
+        nextnode.traverse
     end
 
 end
@@ -72,7 +85,8 @@ class BTree
         #traverse using val and prob return node that it should return
         count = 0
         until val < @root.values[count] do
-            count++
+            count +=1
+            #if this occurs that means val is greater than all of them 
             break if count == @root.values.length
         end
         nextnode = @root.paths[count]
@@ -80,8 +94,10 @@ class BTree
             return nextnode
 
         else 
-            # need to continue traversing prob write a recursive function that takes in a node and returns node
+            return nextnode.traverse(val)
         end
             
     end
+
+    
 end
