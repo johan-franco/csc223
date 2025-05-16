@@ -1,8 +1,8 @@
 class RootNode
     attr_accessor :maxval, :values, :paths
-    def initialize()
+    def initialize(val = [])
         @maxval = 4
-        @values = []
+        @values = val
         @paths = []
     end
 
@@ -14,25 +14,33 @@ class RootNode
         @values << val
         @values.sort!
         minval = @maxval/2 
-        if @values.length() >= @maxval
+        median = @values[minval]
+        if @values.length() > @maxval
             if paths.empty?
                 ##if root is full without having any nodes it is pointing to
-                paths[0] = Node.new(@values.slice(0,minval-1))
-                paths[1] = Node.new(@values.slice(minval+1,@maxval))
+                @paths[0] = Node.new(@values[0...minval])
+                @paths[1] = Node.new(@values[minval+1..-1])
                 @values = @values[@maxval/2]
+                @values = [median]
                 return
             else
                 #if root is full with path to nodes being present
-                lessernode = Node.new(@values.slice(0,minval-1))
-                greaternode = Node.new(@values.slice(minval+1,@maxval))
-                lessernode.paths = @root.paths[0,minval]
-                greaternode.paths = @root.paths[minval+1, @maxval+1]
+                lessernode = Node.new(@values[0...minval])
+                greaternode = Node.new(@values[minval+1..-1])
+                lessernode.paths = @paths[0..minval]
+                greaternode.paths = @paths[minval+1..-1]
                 @root.paths = [lessernode, greaternode]
-                @values = @values[@maxval/2]
+                @values = [median]                
                 return
             end
         end
     
+    end
+
+    def to_s(indent=0)
+        s = "#{'  '*indent}Root: #{@values.inspect}\n"
+        @paths.each { |p| s += p.to_s(indent+1) }
+        return s
     end
 
     def update_paths
@@ -65,6 +73,12 @@ class Node < RootNode
         nextnode.traverse
     end
 
+    def to_s(indent=0)
+        s = "#{'  '*indent}Node: #{@values.inspect}\n"
+        @paths.each { |p| s += p.to_s(indent+1) }
+        return s
+    end
+
 end
 
 class BTree
@@ -74,10 +88,13 @@ class BTree
     end
 
     def insert(val)
-        if @root.paths.empty
+        if @root.paths.empty?
             @root.insert(val)
         else
-            traverse(val)
+            finalnode = traverse(val)
+            finalnode.values << val
+            finalnode.values.sort!
+
         end
     end
 
@@ -90,7 +107,7 @@ class BTree
             break if count == @root.values.length
         end
         nextnode = @root.paths[count]
-        if nextnode.paths == empty
+        if nextnode.paths.empty?
             return nextnode
 
         else 
@@ -99,5 +116,24 @@ class BTree
             
     end
 
-    
+    def visualize
+        puts @root.to_s
+    end
 end
+
+
+
+
+
+btree = BTree.new
+
+puts "Inserting 3, 7, 1, 8, 2, 5, 4, 6, 9"
+[3, 7, 1, 8, 2, 5, 4, 6, 9].each do |val|
+  btree.insert(val)
+  puts "After inserting #{val}:"
+  btree.visualize
+  puts "---------------------"
+end
+
+puts "\nFinal B-tree structure:"
+btree.visualize
