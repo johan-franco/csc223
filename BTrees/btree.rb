@@ -79,6 +79,11 @@ class Node < RootNode
         return s
     end
 
+    def splitnodes
+        right = Node.new(@values[minval+1..-1])
+        @values = @values[0...minval]
+        return right
+    end
 end
 
 class BTree
@@ -94,7 +99,12 @@ class BTree
             finalnode = traverse(val)
             finalnode.values << val
             finalnode.values.sort!
-
+            if finalnode.values.length > finalnode.maxval
+                median = finalnode.values[finalnode.maxval/2]
+                @root.values << median
+                newright = finalnode.splitnodes
+                @root.paths << newright
+            end
         end
     end
 
