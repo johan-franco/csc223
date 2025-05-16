@@ -1,3 +1,5 @@
+# still need to account for insert where finalnode's parent isn't rootnode.. maybe i could just have a var that represents that node?
+
 class RootNode
     attr_accessor :maxval, :values, :paths
     def initialize(val = [])
