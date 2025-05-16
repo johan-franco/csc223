@@ -31,7 +31,7 @@ class RootNode
                 greaternode = Node.new(@values[minval+1..-1])
                 lessernode.paths = @paths[0..minval]
                 greaternode.paths = @paths[minval+1..-1]
-                @root.paths = [lessernode, greaternode]
+                @paths.concat(lessernode.paths, greaternode.paths) 
                 @values = [median]                
                 return
             end
@@ -95,7 +95,7 @@ class BTree
     end
 
     def insert(val)
-        if @root.paths.empty?
+        if @root.paths.empty? or @root.values.length > @root.maxval
             @root.insert(val)
         else
             finalnode = traverse(val)
@@ -140,7 +140,7 @@ end
 btree = BTree.new
 
 puts "Inserting 3, 7, 1, 8, 2, 5, 4, 6, 9"
-[3, 7, 1, 8, 2, 5, 4, 6, 9].each do |val|
+[3, 7, 1, 8, 2, 5, 4, 6, 9, 20, 40, 50, 80, 100, 120, 140, 150, 180].each do |val|
   btree.insert(val)
   puts "After inserting #{val}:"
   btree.visualize
