@@ -61,6 +61,35 @@ graph TD
     C --> J[80, 90, 95, 99, 100]
 ```
 
+Regular Insert Code:
+```ruby
+def insert_non_full(key)
+      i = @keys.size - 1
+  
+      if @leaf
+        @keys << nil
+        while i >= 0 && key < @keys[i]
+          @keys[i + 1] = @keys[i]
+          i -= 1
+        end
+        @keys[i + 1] = key
+      else
+        while i >= 0 && key < @keys[i]
+          i -= 1
+        end
+        i += 1
+  
+        if @children[i].keys.size == 2 * @t - 1
+          split_child(i)
+          if key > @keys[i]
+            i += 1
+          end
+        end
+        @children[i].insert_non_full(key)
+      end
+end
+```
+
 A more complicated case arises if we were to then insert $102$. This is because the requirement is finally reached in this case the leaf node's number of key values are going to exceed $5$ ($2t-1$). This means that the self-balancing tree will need to split to maintain the balance. 
 
 It does this by chosing one of the median values to insert into the parent node as a key. It then creates a new node so that there can be 2 nodes that represent the values less than the new key and greater than the key
@@ -93,6 +122,29 @@ graph TD
     C --> J[80, 90]
     C --> L[ 99, 100, 102 ]
 ```
+Trostin's Code:
+```ruby
+    def split_child(i)
+      y = @children[i]
+      z = BTreeNode.new(@t, y.leaf)
+  
+      mid_key = y.keys[@t - 1]  # middle key to promote
+  
+      # Split keys and children
+      z.keys = y.keys[@t..-1]
+      y.keys = y.keys[0...@t - 1]
+  
+      unless y.leaf
+        z.children = y.children[@t..-1]
+        y.children = y.children[0...@t]
+      end
+  
+      @children.insert(i + 1, z)
+      @keys.insert(i, mid_key)
+    end
+  end
+```
+
 
 ## Deletion:
 This can be a lot more complex as we need to ensure when we delete a key/value that each node still continues to have $t-1$ keys. Moreover, it still needs to be balanced and have all leaf nodes on same level.
@@ -144,6 +196,8 @@ graph TD
     C --> J[65, 68, 70, 80]
     C --> L[99, 102]
 ```
+
+
 
 The other option to balance leaf nodes after underflow is through **"borrowing"** values from other leaf nodes. For example, imagine we are removing key 102 from the same graph we were just using:
 ```mermaid
@@ -204,8 +258,8 @@ graph TD
 # When would they be used?
 First recognize that:
 - Computers can quickly and easily compute comparisons
-- Reading data in takes longer than comparing values
-- B-Trees reduces the number of nodes (aka instances where we read data)
+- Reading data in can take a lot longer than comparing values
+- B-Trees reduces the number of nodes/levels (aka instances where we read data)
 
 ### Example of the first B-Tree as a Binary Search Tree
 ```mermaid

@@ -53,10 +53,11 @@ end
 
 class Node < RootNode
     attr_accessor :minval
-    def initialize(val = [])
+    def initialize(val = [], par = nil)
         super
         @values = val
         @minval = @maxval/2
+        @parent = par
     end
 
     def isRoot
@@ -66,10 +67,13 @@ class Node < RootNode
     def traverse(val)
         return self if @paths.empty?        
         count = 0
-        until val < self.values[count] do
+        until val <= self.values[count] do
             count+=1
             #if this occurs that means val is greater than all of them 
             break if count == @root.values.length
+        end
+        if val == self.values[count]
+            return self
         end
         nextnode = self.paths[count]
         nextnode.traverse
@@ -90,6 +94,7 @@ class Node < RootNode
     def delete(key)
         @keys.delete(key)
         check()
+    end
 
     def check
         if @keys.length < @minval
@@ -97,6 +102,11 @@ class Node < RootNode
         else
             return false
         end
+    end
+    def merge(idx)
+    end
+
+
 end
 
 class BTree
@@ -139,14 +149,36 @@ class BTree
             
     end
 
+    def parenttraverse(val)
+        #traverse using val and prob return node that it should return
+        count = 0
+        until val <= @root.values[count] do
+            count +=1
+            #if this occurs that means val is greater than all of them 
+            break if count == @root.values.length
+        end
+        if val == @root.values[count]
+            return @root
+        end
+        nextnode = @root.paths[count]
+        if nextnode.paths.empty?
+            return nextnode
+
+        else 
+            return nextnode.traverse(val)
+        end
+            
+    end
+
     def delete(val)
         deletenode = traverse(val)
 
-        if deletenode.isRoot
+    end
 
     def visualize
         puts @root.to_s
     end
+
 end
 
 
