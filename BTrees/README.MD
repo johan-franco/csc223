@@ -8,7 +8,8 @@ General B-Tree Characteristics:
 - All leaves appear on the same level.
 - Each key regardless of whether it is a leaf or internal node points to data.
 - A non-leaf node with k children contains k−1 keys.
-- Node will split upon realizing it is inserting in a node that has key values that are equal to $2t-1$ in key values/when $2t$ in chidren are reached
+- Internal nodes will split when it's children exceeds $2t$
+- Leaf nodes split when $2t-1$ is exceeded for the amount of key values they have
 
 ```mermaid
 graph TD
@@ -45,8 +46,23 @@ graph TD
 
 ## Insertion:
 
-If we were to insert the number 99 (& remove 110)on the B-Tree you just saw it would now look like this. This is the simplest case of insertion  (assuming t= 3) as the node doesn't exceed the maximum number of keys it can have, which would be 2t-1.
+If we were to insert the number 99 on this B-Tree with t=3:
 
+### Before inserting 99
+```mermaid
+graph TD
+    A[50] --> B[20, 30, 40]
+    A --> C[60, 70]
+    B --> D[10, 15]
+    B --> E[25,28]
+    B --> F[35,38]
+    B --> G[45,48]
+    C --> H[55,58]
+    C --> I[65,68]
+    C --> J[80, 90, 95, 100]
+```
+
+It would now look at this: 
 ### After inserting 99:
 ```mermaid
 graph TD
@@ -60,6 +76,7 @@ graph TD
     C --> I[65,68]
     C --> J[80, 90, 95, 99, 100]
 ```
+This is the simplest case of insertion  (assuming t= 3) as the node doesn't exceed the maximum number of keys it can have, which would be 2t-1.
 
 Regular Insert Code:
 ```ruby
@@ -168,7 +185,6 @@ graph TD
 ```
 ```ruby
 #To remove a leaf key all we would need to do is remove the key from the array where it is held 
-
 @values.delete(val)
 #or
 @values.delete_at(index)

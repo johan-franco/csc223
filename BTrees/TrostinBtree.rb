@@ -52,7 +52,7 @@ class BTreeNode
       @children.insert(i + 1, z)
       @keys.insert(i, mid_key)
     end
-  end
+end
   
   class BTree
     def initialize(t = 3)
