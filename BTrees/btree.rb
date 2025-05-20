@@ -103,9 +103,33 @@ class Node < RootNode
             return false
         end
     end
-    def merge(idx)
-    end
 
+    def merge(sibling)
+        par = @parent
+        if sibling.values[0] < @values[0]
+            leftchild = sibling
+            rightchild = self
+        else
+            rightchild = sibling
+            leftchild = self
+        end
+
+        count = 0
+        val = rightchild.values[0]
+        until val <= par.values[count] do
+            count+=1
+        end
+
+        prevsep = par.values[count-1]
+        par.values.delete(prevsep)
+
+        newsep = right_child.values[0]
+        right_child.values.delete(newsep)
+
+        merging 
+        if val
+        
+    end
 
 end
 
@@ -173,7 +197,7 @@ class BTree
     def delete(val)
         deletenode = traverse(val)
 
-    end
+        if deletenode.isRoot
 
     def visualize
         puts @root.to_s

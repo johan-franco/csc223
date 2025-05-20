@@ -166,7 +166,13 @@ graph TD
     C --> J[80, 90]
     C --> L[99, 102]
 ```
+```ruby
+#To remove a leaf key all we would need to do is remove the key from the array where it is held 
 
+@values.delete(val)
+#or
+@values.delete_at(index)
+```
 ### Deleting from leaf node (causing underflow)
 Using the same graph as before this would occur if we remove any key from a leaf node. If we were to remove key 90 the grpah would then look like this:
 ```mermaid
@@ -197,6 +203,32 @@ graph TD
     C --> L[99, 102]
 ```
 
+```ruby
+def merge_leaf(sibling)
+    par = @parent
+    if sibling.values[0] < @values[0]
+        leftchild = sibling
+        rightchild = self
+    else
+        rightchild = sibling
+        leftchild = self
+    end
+
+    count = 0
+    val = rightchild.values[0]
+    until val < par.values[count] do
+        count+=1
+    end
+
+    prevsep = par.values[count-1]
+    par.values.delete(prevsep)
+
+    leftchild.values << rightchild.values
+    leftchild.values << prevsep
+    par.keys.delete_at(count)
+    par.keys[count-1] = self`
+end
+```
 
 
 The other option to balance leaf nodes after underflow is through **"borrowing"** values from other leaf nodes. For example, imagine we are removing key 102 from the same graph we were just using:
@@ -254,6 +286,36 @@ graph TD
     C --> H[55, 58]
     C --> J[65, 68]
     C --> L[95,102]
+```
+```ruby
+def internal_del(sibling)
+    par = @parent
+    if sibling.values[0] < @values[0]
+        leftchild = sibling
+        rightchild = self
+    else
+        rightchild = sibling
+        leftchild = self
+    end
+
+    count = 0
+    val = rightchild.values[0]
+    until val < par.values[count] do
+        count+=1
+    end
+
+    prevsep = par.values[count-1]
+    par.values.delete(prevsep)
+
+    newsep = right_child.values[0]
+    right_child.values.delete(newsep)
+
+    #leftchild.values << rightchild.values
+    #leftchild.values << prevsep
+    par.keys.delete_at(count)
+    par.keys[count-1] = self
+        
+end
 ```
 # When would they be used?
 First recognize that:
