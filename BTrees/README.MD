@@ -8,8 +8,8 @@ General B-Tree Characteristics:
 - All leaves appear on the same level.
 - Each key regardless of whether it is a leaf or internal node points to data.
 - A non-leaf node with k children contains k−1 keys.
+- Node will split upon realizing it is inserting in a node that has key values that are equal to $2t-1$ in key values/when $2t$ in chidren are reached
 
-## Example B-Tree
 ```mermaid
 graph TD
     A[50] --> B[20 30]
@@ -23,7 +23,7 @@ graph TD
 ```
 
 
-## What $t$ values could this B-Tree have?
+## What $t$ value does this B-Tree have?
 ```mermaid
 graph TD
     A[50] --> B[20, 30, 40]
@@ -34,12 +34,18 @@ graph TD
     B --> G[45,48]
     C --> H[55,58]
     C --> I[65,68]
-    C --> J[80, 90, 95]
+    C --> J[80, 90, 95, 100, 110]
 ```
+
+
+
+
+
+
 
 ## Insertion:
 
-If we were to insert the number 99 on the B-Tree you just saw it would now look like this. This is the simplest case of insertion as the node doesn't exceed the maximum number of keys it can have.
+If we were to insert the number 99 (& remove 110)on the B-Tree you just saw it would now look like this. This is the simplest case of insertion  (assuming t= 3) as the node doesn't exceed the maximum number of keys it can have, which would be 2t-1.
 
 ### After inserting 99:
 ```mermaid
@@ -52,12 +58,149 @@ graph TD
     B --> G[45,48]
     C --> H[55,58]
     C --> I[65,68]
-    C --> J[80, 90, 95, 99]
+    C --> J[80, 90, 95, 99, 100]
 ```
 
-A more complicated case arises if we were to then insert 100. 
+A more complicated case arises if we were to then insert $102$. This is because the requirement is finally reached in this case the leaf node's number of key values are going to exceed $5$ ($2t-1$). This means that the self-balancing tree will need to split to maintain the balance. 
+
+It does this by chosing one of the median values to insert into the parent node as a key. It then creates a new node so that there can be 2 nodes that represent the values less than the new key and greater than the key
+
+### Before Split (trying to insert once node would exceed values)
+```mermaid
+graph TD
+    A[50] --> B[20, 30, 40]
+    A --> C[60, 70]
+    B --> D[10, 15]
+    B --> E[25,28]
+    B --> F[35,38]
+    B --> G[45,48]
+    C --> H[55,58]
+    C --> I[65,68]
+    C --> J[80, 90, 95, 99, 100, 102 ]
+```
+### B-Tree Splits (promoted 95 to parent node)
+
+```mermaid
+graph TD
+    A[50] --> B[20, 30, 40]
+    A --> C[60, 70, 95]
+    B --> D[10, 15]
+    B --> E[25,28]
+    B --> F[35,38]
+    B --> G[45,48]
+    C --> H[55,58]
+    C --> I[65,68]
+    C --> J[80, 90]
+    C --> L[ 99, 100, 102 ]
+```
+
+## Deletion:
+This can be a lot more complex as we need to ensure when we delete a key/value that each node still continues to have $t-1$ keys. Moreover, it still needs to be balanced and have all leaf nodes on same level.
 
 
+
+### Deleting from leaf node (without causing underflow)
+The simplest case is when we delete from a leaf node with the node still satisfying the $t-1$ condition. In case of this tree this would be if we deleted key $100$. The key is simply removed normally as expected.
+```mermaid
+graph TD
+    A[50] --> B[20, 30, 40]
+    A --> C[60, 70, 95]
+    B --> D[10, 15]
+    B --> E[25, 28]
+    B --> F[35, 38]
+    B --> G[45, 48]
+    C --> H[55, 58]
+    C --> I[65, 68]
+    C --> J[80, 90]
+    C --> L[99, 102]
+```
+
+### Deleting from leaf node (causing underflow)
+Using the same graph as before this would occur if we remove any key from a leaf node. If we were to remove key 90 the grpah would then look like this:
+```mermaid
+graph TD
+    A[50] --> B[20, 30, 40]
+    A --> C[60, 70, 95]
+    B --> D[10, 15]
+    B --> E[25, 28]
+    B --> F[35, 38]
+    B --> G[45, 48]
+    C --> H[55, 58]
+    C --> I[65, 68]
+    C --> J[80]
+    C --> L[99, 102]
+```
+
+The first method we could fix this is through merging nodes together. Essentially we can combine the two children nodes and the parent node to balance the tree. In this case we would be combining parent node $70$ and its children, which should appear as: 
+```mermaid
+graph TD
+    A[50] --> B[20, 30, 40]
+    A --> C[60 95]
+    B --> D[10, 15]
+    B --> E[25, 28]
+    B --> F[35, 38]
+    B --> G[45, 48]
+    C --> H[55, 58]
+    C --> J[65, 68, 70, 80]
+    C --> L[99, 102]
+```
+
+The other option to balance leaf nodes after underflow is through **"borrowing"** values from other leaf nodes. For example, imagine we are removing key 102 from the same graph we were just using:
+```mermaid
+graph TD
+    A[50] --> B[20, 30, 40]
+    A --> C[60 95]
+    B --> D[10, 15]
+    B --> E[25, 28]
+    B --> F[35, 38]
+    B --> G[45, 48]
+    C --> H[55, 58]
+    C --> J[65, 68, 70, 80]
+    C --> L[102]
+```
+To succesfully borrow and balance this tree we will promote $80$ to the parent node and move $95$ (which was previously in the parent node) to the leaf node that needs another key.
+```mermaid
+graph TD
+    A[50] --> B[20, 30, 40]
+    A --> C[60, 80]
+    B --> D[10, 15]
+    B --> E[25, 28]
+    B --> F[35, 38]
+    B --> G[45, 48]
+    C --> H[55, 58]
+    C --> J[65, 68, 70]
+    C --> L[95,102]
+```
+
+### Deleting internal node key
+When we delete an internal node key we need a new key to act as the separator/parent of the nodes. The keys that can assume this role are the greatest value in the left child and the smallest value in the right children (remember that the left child node of that key represents keys that are less than parent and right being values that are greater than parent node)
+
+Continuing to use the same graph as before imagine if we removed 80:
+```mermaid
+graph TD
+    A[50] --> B[20, 30, 40]
+    A --> C[60]
+    B --> D[10, 15]
+    B --> E[25, 28]
+    B --> F[35, 38]
+    B --> G[45, 48]
+    C --> H[55, 58]
+    C --> J[65, 68, 70]
+    C --> L[95,102]
+```
+Either 70 or 95 could enter the parent node to act as the separater. In this case if 95 acted as the separator it would result in the leaf node not having sufficient keys, which would then cause the same result as immediately promoting 70.
+```mermaid
+graph TD
+    A[50] --> B[20, 30, 40]
+    A --> C[60, 70]
+    B --> D[10, 15]
+    B --> E[25, 28]
+    B --> F[35, 38]
+    B --> G[45, 48]
+    C --> H[55, 58]
+    C --> J[65, 68]
+    C --> L[95,102]
+```
 # When would they be used?
 First recognize that:
 - Computers can quickly and easily compute comparisons

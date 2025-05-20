@@ -86,6 +86,17 @@ class Node < RootNode
         @values = @values[0...minval]
         return right
     end
+
+    def delete(key)
+        @keys.delete(key)
+        check()
+
+    def check
+        if @keys.length < @minval
+            return true
+        else
+            return false
+        end
 end
 
 class BTree
@@ -127,6 +138,11 @@ class BTree
         end
             
     end
+
+    def delete(val)
+        deletenode = traverse(val)
+
+        if deletenode.isRoot
 
     def visualize
         puts @root.to_s
